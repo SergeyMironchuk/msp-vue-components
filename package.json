@@ -1,0 +1,47 @@
+{
+  "name": "msp-vue-components",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "build": "vue-cli-service build --target lib --name MspVueComponents .\\src\\MspVueComponents.js --dest www\\msp-vue --no-clean"
+  },
+  "dependencies": {
+    "bootstrap": "^3.4.1",
+    "core-js": "^3.4.4",
+    "datatables.net": "^1.10.20",
+    "datatables.net-bs": "^1.10.20",
+    "datatables.net-buttons-bs": "^1.6.1",
+    "jquery": "^3.4.1",
+    "vue": "^2.6.10",
+    "@fortawesome/fontawesome-free": "^5.12.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
