@@ -31455,11 +31455,16 @@ module.exports = {
     'dataSourceUrl': String,
     'className': String,
     'serverSide': Boolean,
-    'dataSourceMethod': String
+    'dataSourceMethod': String,
+    'refreshButtonIcon': String,
+    'searchButtonIcon': String
   },
   render: function render(createElement) {
     return createElement('table', {
-      id: this.$attrs["id"]
+      id: this.$attrs["id"],
+      style: {
+        width: "100%"
+      }
     }, this.$slots.default);
   },
   components: {
@@ -31470,10 +31475,16 @@ module.exports = {
       columns: []
     };
   },
+  methods: {
+    refresh: function refresh() {
+      var tableElement = getTableDomElement(this);
+      var dataTable = tableElement.DataTable();
+      dataTable.draw();
+    }
+  },
   mounted: function mounted() {
     var dataTableConfig = prepareDataTableConfigs(this.columns);
-    var id = this.$attrs["id"];
-    var tableElement = id ? jquery__WEBPACK_IMPORTED_MODULE_20___default()('table#' + id).first() : jquery__WEBPACK_IMPORTED_MODULE_20___default()('table').first();
+    var tableElement = getTableDomElement(this);
     tableElement.addClass(this.className); // noinspection SpellCheckingInspection
 
     var serverSide = this.serverSide;
@@ -31489,10 +31500,19 @@ module.exports = {
       "columns": dataTableConfig.dtColumns,
       "columnDefs": dataTableConfig.dtColumnDefs,
       "buttons": ['colvis'],
-      "dom": '<"row no-gutters"' + '<"col-sm-12 col-md-6 text-left"<"tableFilter">>' + '<"col-sm-12 col-md-6 text-right"<"inlineBlock"l><"inlineBlock"B>>' + '>' + '<"actions">' + 'rt' + '<"row no-gutters"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
+      "dom": '<"row no-gutters"' + '<"col-sm-12 col-md-6 text-left"<"tableFilter">>' + '<"col-sm-12 col-md-6 text-right"<"inlineBlock"l><"inlineBlock"B><"inlineBlock refreshTable">>' + '>' + '<"actions">' + 'rt' + '<"row no-gutters"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
     });
     var columnComponents = this.columns;
-    setTableFilter(columnComponents, tableElement, dataTable);
+    setTableFilter(this, columnComponents, tableElement, dataTable);
+    setTableRefreshButton(this, tableElement);
+    var tableComponent = this;
+    tableElement.find('tbody').on('click', 'tr', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_20___default()(this).toggleClass('selected');
+      var ids = dataTable.rows('.selected').data().map(function (d) {
+        return d.id;
+      });
+      tableComponent.$emit('row-selected', ids);
+    });
     tableElement.parent().find('div.inlineBlock').each(function () {
       var inlineBlock = jquery__WEBPACK_IMPORTED_MODULE_20___default()(this);
       inlineBlock.css("display", "inline-block");
@@ -31505,6 +31525,11 @@ module.exports = {
     setAsyncElements(dataTable, tableElement, columnComponents);
   }
 });
+
+function getTableDomElement(tableComponent) {
+  var id = tableComponent.$attrs["id"];
+  return id ? jquery__WEBPACK_IMPORTED_MODULE_20___default()('table#' + id).first() : jquery__WEBPACK_IMPORTED_MODULE_20___default()('table').first();
+}
 
 function setAsyncElements(dataTable, tableElement, columnComponents) {
   dataTable.on('draw', function () {
@@ -31533,7 +31558,7 @@ function setAsyncElements(dataTable, tableElement, columnComponents) {
 
     for (var i = 0; i < asyncElementsData.length; i++) {
       var nextElementData = asyncElementsData[i];
-      var asyncContent = nextElementData.asyncContent.getAsyncContent(nextElementData.modelId, nextElementData);
+      var asyncContent = nextElementData.asyncComponent.getAsyncContent(nextElementData.modelId, nextElementData);
 
       if (currentColumn === nextElementData.columnNo && currentControl === nextElementData.controlNo) {
         promisesArray.push(asyncContent);
@@ -31640,7 +31665,7 @@ function prepareDataTableConfigs(columnComponents) {
   return dataTableConfig;
 }
 
-function setTableFilter(columnComponents, tableElement, dataTable) {
+function setTableFilter(tableComponent, columnComponents, tableElement, dataTable) {
   var columnsHtmlList = '';
   columnComponents.forEach(function (column) {
     // noinspection HtmlUnknownAttribute
@@ -31648,7 +31673,7 @@ function setTableFilter(columnComponents, tableElement, dataTable) {
   });
   tableElement.parent().find('div.tableFilter').each(function () {
     var tableFilter = jquery__WEBPACK_IMPORTED_MODULE_20___default()(this);
-    tableFilter.html("\n                <div class=\"input-group\">\n                  <div class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default main\">Select column...</button>\n                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                        <span class=\"caret\"></span>\n                        <span class=\"sr-only\">Toggle Dropdown</span>\n                    </button>\n                    <ul class=\"dropdown-menu\">\n                    ".concat(columnsHtmlList, "\n                    </ul>\n                  </div>\n                  <input type=\"text\" class=\"form-control\" aria-label=\"...\">\n                  <span class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default search\">\n                      <span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span>\n                    </button>\n                  </span>\n                </div>\n                "));
+    tableFilter.html("\n                <div class=\"input-group\">\n                  <div class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default main\">Select column...</button>\n                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                        <span class=\"caret\"></span>\n                        <span class=\"sr-only\">Toggle Dropdown</span>\n                    </button>\n                    <ul class=\"dropdown-menu\">\n                    ".concat(columnsHtmlList, "\n                    </ul>\n                  </div>\n                  <input type=\"text\" class=\"form-control\" aria-label=\"...\">\n                  <span class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default\">\n                        ").concat(tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>", "\n                    </button>\n                  </span>\n                </div>\n                "));
     var filterButton = tableFilter.find('button.main');
     var filterElement = tableFilter.find('a');
     var filterInput = tableFilter.find('input');
@@ -31672,6 +31697,17 @@ function setTableFilter(columnComponents, tableElement, dataTable) {
           });
         }
       });
+    });
+  });
+}
+
+function setTableRefreshButton(tableComponent, tableDomElement) {
+  tableDomElement.parent().find('div.refreshTable').each(function () {
+    var refreshTable = jquery__WEBPACK_IMPORTED_MODULE_20___default()(this);
+    refreshTable.html("\n                <div class=\"input-group\">\n                    <button type=\"button\" class=\"btn btn-default\">\n                        ".concat(tableComponent.refreshButtonIcon ? tableComponent.refreshButtonIcon : "<span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>", "\n                    </button>\n                </div>\n                "));
+    var refreshTableButton = refreshTable.find('button');
+    refreshTableButton.on('click', function () {
+      tableComponent.refresh();
     });
   });
 }
@@ -31705,12 +31741,12 @@ function getAllAsyncElementsData(tableElement, dataTable, columnComponents) {
 
     if (contentId) {
       var contentIdArray = contentId.split('_');
-      var asyncContent = columnComponents[+contentIdArray[0]].asyncContents[+contentIdArray[1]];
+      var asyncComponent = columnComponents[+contentIdArray[0]].asyncContents[+contentIdArray[1]];
       asyncElements.push({
         contentId: contentId,
         modelId: model.id,
         contentElement: contentElement,
-        asyncContent: asyncContent,
+        asyncComponent: asyncComponent,
         columnNo: +contentIdArray[0],
         controlNo: +contentIdArray[1]
       });

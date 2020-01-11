@@ -11,11 +11,23 @@
 
     export default {
         name: "MspDataTable",
-        props: {'dataSourceUrl': String, 'className': String, 'serverSide': Boolean, 'dataSourceMethod': String},
+        props: {
+            'dataSourceUrl': String,
+            'className': String,
+            'serverSide': Boolean,
+            'dataSourceMethod': String,
+            'refreshButtonIcon': String,
+            'searchButtonIcon': String
+        },
         render: function (createElement) {
             return createElement(
                 'table',
-                {id: this.$attrs["id"]},
+                {
+                    id: this.$attrs["id"],
+                    style: {
+                        width: "100%"
+                    }
+                },
                 this.$slots.default
             )
         },
@@ -27,10 +39,16 @@
                 columns: []
             }
         },
+        methods: {
+            refresh: function(){
+                let tableElement = getTableDomElement(this);
+                let dataTable = tableElement.DataTable();
+                dataTable.draw();
+            }
+        },
         mounted: function () {
             let dataTableConfig = prepareDataTableConfigs(this.columns);
-            let id = this.$attrs["id"];
-            let tableElement = id ? $('table#' + id).first() : $('table').first();
+            let tableElement = getTableDomElement(this);
             tableElement.addClass(this.className);
             // noinspection SpellCheckingInspection
             let serverSide = this.serverSide;
@@ -49,7 +67,7 @@
                 "dom":
                     '<"row no-gutters"' +
                         '<"col-sm-12 col-md-6 text-left"<"tableFilter">>' +
-                        '<"col-sm-12 col-md-6 text-right"<"inlineBlock"l><"inlineBlock"B>>' +
+                        '<"col-sm-12 col-md-6 text-right"<"inlineBlock"l><"inlineBlock"B><"inlineBlock refreshTable">>' +
                     '>' +
                     '<"actions">' +
                     'rt' +
@@ -57,7 +75,15 @@
             });
 
             let columnComponents = this.columns;
-            setTableFilter(columnComponents, tableElement, dataTable);
+            setTableFilter(this, columnComponents, tableElement, dataTable);
+            setTableRefreshButton(this, tableElement);
+
+            let tableComponent = this;
+            tableElement.find('tbody').on( 'click', 'tr', function () {
+                $(this).toggleClass('selected');
+                let ids = dataTable.rows('.selected').data().map(d => d.id);
+                tableComponent.$emit('row-selected', ids);
+            });
 
             tableElement.parent().find('div.inlineBlock').each(function () {
                 let inlineBlock = $(this);
@@ -73,6 +99,11 @@
             setAsyncElements(dataTable, tableElement, columnComponents);
         }
     };
+
+    function getTableDomElement(tableComponent) {
+        let id = tableComponent.$attrs["id"];
+        return id ? $('table#' + id).first() : $('table').first();
+    }
 
     function setAsyncElements(dataTable, tableElement, columnComponents) {
         dataTable.on('draw', function () {
@@ -97,7 +128,7 @@
             let promisesArray = [];
             for (let i = 0; i < asyncElementsData.length; i++) {
                 let nextElementData = asyncElementsData[i];
-                let asyncContent = nextElementData.asyncContent.getAsyncContent(nextElementData.modelId, nextElementData);
+                let asyncContent = nextElementData.asyncComponent.getAsyncContent(nextElementData.modelId, nextElementData);
                 if (currentColumn === nextElementData.columnNo && currentControl === nextElementData.controlNo) {
                     promisesArray.push(asyncContent)
                 } else {
@@ -210,7 +241,7 @@
         return dataTableConfig;
     }
 
-    function setTableFilter (columnComponents, tableElement, dataTable) {
+    function setTableFilter (tableComponent, columnComponents, tableElement, dataTable) {
         let columnsHtmlList = '';
         columnComponents.forEach(function (column) {
             // noinspection HtmlUnknownAttribute
@@ -232,8 +263,8 @@
                       </div>
                       <input type="text" class="form-control" aria-label="...">
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-default search">
-                          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        <button type="button" class="btn btn-default">
+                            ${ tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>"}
                         </button>
                       </span>
                     </div>
@@ -265,6 +296,23 @@
         });
     }
 
+    function setTableRefreshButton(tableComponent, tableDomElement){
+        tableDomElement.parent().find('div.refreshTable').each(function () {
+            let refreshTable = $(this);
+            refreshTable.html(`
+                    <div class="input-group">
+                        <button type="button" class="btn btn-default">
+                            ${ tableComponent.refreshButtonIcon ? tableComponent.refreshButtonIcon : "<span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>"}
+                        </button>
+                    </div>
+                    `);
+            let refreshTableButton = refreshTable.find('button');
+            refreshTableButton.on('click', function () {
+                tableComponent.refresh();
+            });
+        });
+    }
+
     function processClickOnActionElement (actionElement, dataTable, columnComponents) {
         let tr = actionElement.parents("tr");
         let model = dataTable.row(tr).data();
@@ -291,12 +339,12 @@
             let contentId = contentElement.attr("async-content-id");
             if (contentId) {
                 let contentIdArray = contentId.split('_');
-                let asyncContent = columnComponents[+contentIdArray[0]].asyncContents[+contentIdArray[1]];
+                let asyncComponent = columnComponents[+contentIdArray[0]].asyncContents[+contentIdArray[1]];
                 asyncElements.push({
                     contentId: contentId,
                     modelId: model.id,
                     contentElement: contentElement,
-                    asyncContent: asyncContent,
+                    asyncComponent: asyncComponent,
                     columnNo: +contentIdArray[0],
                     controlNo: +contentIdArray[1]
                 });
@@ -345,5 +393,8 @@
     .row.no-gutters > [class*="col-"] {
         padding-right: 0;
         padding-left: 0;
+    }
+    tbody>tr.selected, .table-striped>tbody>tr:nth-of-type(odd).selected{
+        background-color: #aab7d1;
     }
 </style>

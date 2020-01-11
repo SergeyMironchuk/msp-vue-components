@@ -1,11 +1,13 @@
 <template>
   <div id="app" style="padding: 5px;">
-    <msp-data-table id="dt1" data-source-url="data/objects.txt"
-                    class-name="table table-striped table-bordered">
+    <msp-data-table ref="dataTable" id="dt1" data-source-url="data/objects.txt"
+                    refresh-button-icon="<i class='fas fa-sync'></i>"
+                    search-button-icon="<i class='fas fa-search'></i>"
+                    class-name="table table-striped table-bordered"
+                    v-on:row-selected="rowSelected">
       <msp-column header="name" model-property="name" sortable>
         <msp-column-template>
           [[if(model.id)?]]<i class="fas fa-user-circle fa-1x"/> [[model.name]] (<b> [[model.id]] </b>)[[:]]
-          [[if(!model.id)?]]<i class="fas fa-user-circle fa-1x"/> [[model.name]] (<b> [[model.id]] </b>)[[:]]
         </msp-column-template>
       </msp-column>
       <msp-column header="position" model-property="position" sortable />
@@ -36,6 +38,12 @@
         </msp-async-content>
       </msp-column>
     </msp-data-table>
+    <hr/>
+    <label>External things:</label>
+    <br/>
+    <span>Selected Ids: {{selectedIds}}</span>
+    <br/>
+    <button v-on:click="refresh">refresh</button>
   </div>
 </template>
 
@@ -56,7 +64,18 @@
       MspColumn,
       MspDataTable
     },
+    data: function() {
+        return {
+          selectedIds: ''
+        }
+      },
     methods: {
+      refresh: function(){
+        this.$refs.dataTable.refresh();
+      },
+      rowSelected: function(ids){
+        this.selectedIds = ids.join(',');
+      },
       onEmail: function (id) {
         alert('EMailed to ' + id);
       },
