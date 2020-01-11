@@ -263,7 +263,7 @@
                       </div>
                       <input type="text" class="form-control" aria-label="...">
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-default">
+                        <button type="button" class="btn btn-default search">
                             ${ tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>"}
                         </button>
                       </span>
@@ -276,7 +276,6 @@
             filterElement.on('click', function () {
                 let value = $(this).attr('value');
                 filterButton.html(value);
-                //filterInput.off('keyup change clear');
                 filterSearchButton.off('click');
 
                 dataTable.columns().every(function () {

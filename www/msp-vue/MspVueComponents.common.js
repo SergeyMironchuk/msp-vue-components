@@ -31673,15 +31673,14 @@ function setTableFilter(tableComponent, columnComponents, tableElement, dataTabl
   });
   tableElement.parent().find('div.tableFilter').each(function () {
     var tableFilter = jquery__WEBPACK_IMPORTED_MODULE_20___default()(this);
-    tableFilter.html("\n                <div class=\"input-group\">\n                  <div class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default main\">Select column...</button>\n                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                        <span class=\"caret\"></span>\n                        <span class=\"sr-only\">Toggle Dropdown</span>\n                    </button>\n                    <ul class=\"dropdown-menu\">\n                    ".concat(columnsHtmlList, "\n                    </ul>\n                  </div>\n                  <input type=\"text\" class=\"form-control\" aria-label=\"...\">\n                  <span class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default\">\n                        ").concat(tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>", "\n                    </button>\n                  </span>\n                </div>\n                "));
+    tableFilter.html("\n                <div class=\"input-group\">\n                  <div class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default main\">Select column...</button>\n                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                        <span class=\"caret\"></span>\n                        <span class=\"sr-only\">Toggle Dropdown</span>\n                    </button>\n                    <ul class=\"dropdown-menu\">\n                    ".concat(columnsHtmlList, "\n                    </ul>\n                  </div>\n                  <input type=\"text\" class=\"form-control\" aria-label=\"...\">\n                  <span class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default search\">\n                        ").concat(tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>", "\n                    </button>\n                  </span>\n                </div>\n                "));
     var filterButton = tableFilter.find('button.main');
     var filterElement = tableFilter.find('a');
     var filterInput = tableFilter.find('input');
     var filterSearchButton = tableFilter.find('button.search');
     filterElement.on('click', function () {
       var value = jquery__WEBPACK_IMPORTED_MODULE_20___default()(this).attr('value');
-      filterButton.html(value); //filterInput.off('keyup change clear');
-
+      filterButton.html(value);
       filterSearchButton.off('click');
       dataTable.columns().every(function () {
         var column = this;
