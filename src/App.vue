@@ -80,59 +80,41 @@
         alert('EMailed to ' + id);
       },
       onDelete: function (id) {
-        alert('Delete ' + id);
+        alert('Deleted ' + id);
       },
       getAsyncContent1: function (id, element) {
-        return new Promise(function (resolve, reject) {
+        // Should be returned Promise for object with structure as below (for both resolve and reject).
+        // In practice network request to web api contains inside.
+        return new Promise(function (resolve) {
           setTimeout(function () {
-            // eslint-disable-next-line no-constant-condition
-            if (true) {
-              resolve({
-                content: '<i class="fas fa-apple-alt fa-1x"></i>&nbsp;',
-                element: element
-              });
-            } else {
-              reject({
-                content: 'error',
-                element: element
-              });
-            }
+            resolve({
+              content: '<i class="fas fa-apple-alt fa-1x"></i>&nbsp;',
+              element: element
+            });
           }, 1000);
         });
       },
       getAsyncContent2: function (id, element) {
-        return new Promise(function (resolve, reject) {
+        // Should be returned Promise for object with structure as below (for both resolve and reject).
+        // In practice network request to web api contains inside.
+        return new Promise(function (resolve) {
           setTimeout(function () {
-            // eslint-disable-next-line no-constant-condition
-            if (true) {
-              resolve({
-                content: '<i class="far fa-smile fa-1x"></i>&nbsp;',
-                element: element
-              });
-            } else {
-              reject({
-                content: 'error',
-                element: element
-              });
-            }
+            resolve({
+              content: '<i class="far fa-smile fa-1x"></i>&nbsp;',
+              element: element
+            });
           }, 5000);
         });
       },
       getAsyncContent: function (id, element) {
-        return new Promise(function (resolve, reject) {
+        // Should be returned Promise for object with structure as below (for both resolve and reject).
+        // In practice network request to web api contains inside.
+        return new Promise(function (resolve) {
           setTimeout(function () {
-            // eslint-disable-next-line no-constant-condition
-            if (true) {
-              resolve({
-                content: ', office ' + id,
-                element: element
-              });
-            } else {
-              reject({
-                content: 'error',
-                element: element
-              });
-            }
+            resolve({
+              content: ', office ' + id,
+              element: element
+            });
           }, 2000);
         });
       }
