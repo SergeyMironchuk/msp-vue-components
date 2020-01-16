@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import _MspColumnTemplate from "./components/MspColumnTemplate.vue";
-import _MspColumnAction from "./components/MspColumnAction.vue";
-import _MspAsyncContent from "./components/MspAsyncContent.vue";
-import _MspColumn from "./components/MspColumn.vue";
-import _MspDataTable from "./components/MspDataTable.vue";
+import _MspColumnTemplate from "./components/DataTable/MspColumnTemplate.vue";
+import _MspColumnAction from "./components/DataTable/MspColumnAction.vue";
+import _MspAsyncContent from "./components/DataTable/MspAsyncContent.vue";
+import _MspColumn from "./components/DataTable/MspColumn.vue";
+import _MspDataTable from "./components/DataTable/MspDataTable.vue";
 
 export var MspColumnTemplate = _MspColumnTemplate;
 export var MspColumnAction = _MspColumnAction;

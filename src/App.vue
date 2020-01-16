@@ -1,10 +1,14 @@
 <template>
   <div id="app" style="padding: 5px;">
-    <msp-data-table ref="dataTable" id="dt1" data-source-url="data/objects.txt"
+    <msp-data-table ref="dataTable" id="dt1" data-source-url="data/objects.txt" key-field="id"
                     refresh-button-icon="<i class='fas fa-sync'></i>"
                     search-button-icon="<i class='fas fa-search'></i>"
                     class-name="table table-striped table-bordered"
-                    v-on:row-selected="rowSelected">
+                    selectable-rows
+                    selected-row-icon="<i class='far fa-check-square'>"
+                    unselected-row-icon="<i class='far fa-square'>"
+                    exists-selected-rows-icon="<i class='fas fa-square'></i>"
+                    v-on:row-selected="onRowSelected">
       <msp-column header="name" model-property="name" sortable>
         <msp-column-template>
           [[if(model.id)?]]<i class="fas fa-user-circle fa-1x"/> [[model.name]] (<b> [[model.id]] </b>)[[:]]
@@ -39,21 +43,33 @@
       </msp-column>
     </msp-data-table>
     <hr/>
-    <label>External things:</label>
-    <br/>
-    <span>Selected Ids: {{selectedIds}}</span>
-    <br/>
-    <button v-on:click="refresh">refresh</button>
+    <p>
+      <label>External things:</label>
+      <br/>
+      <span>Selected Ids: {{selectedIds}}</span>
+    </p>
+
+    <p>
+      <button type="button" class="btn btn-primary"
+              v-on:click="displaySelectedIds">
+        <i class="fas fa-list-ol"></i> Get Selected IDs
+      </button>
+    </p>
+
+    <button id="refreshButton" type="button" class="btn btn-primary"
+            v-on:click="refresh">
+      <i class='fas fa-sync'></i> Refresh (this button is configured externally)
+    </button>
   </div>
 </template>
 
 <script>
   import '@fortawesome/fontawesome-free/css/all.css'
-  import MspColumnTemplate from "./components/MspColumnTemplate.vue";
-  import MspColumnAction from "./components/MspColumnAction.vue";
-  import MspAsyncContent from "./components/MspAsyncContent.vue";
-  import MspColumn from "./components/MspColumn.vue";
-  import MspDataTable from "./components/MspDataTable.vue";
+  import MspColumnTemplate from "./components/DataTable/MspColumnTemplate.vue";
+  import MspColumnAction from "./components/DataTable/MspColumnAction.vue";
+  import MspAsyncContent from "./components/DataTable/MspAsyncContent.vue";
+  import MspColumn from "./components/DataTable/MspColumn.vue";
+  import MspDataTable from "./components/DataTable/MspDataTable.vue";
 
   export default {
     name: 'app',
@@ -69,12 +85,20 @@
           selectedIds: ''
         }
       },
+    mounted: function(){
+      // eslint-disable-next-line no-undef
+      this.$refs.dataTable.addActionElement($("#refreshButton"));
+    },
     methods: {
       refresh: function(){
         this.$refs.dataTable.refresh();
       },
-      rowSelected: function(ids){
+      onRowSelected: function(ids){
         this.selectedIds = ids.join(',');
+      },
+      displaySelectedIds: function() {
+        let ids = this.$refs.dataTable.getSelectedIds();
+        alert(ids.join(','));
       },
       onEmail: function (id) {
         alert('EMailed to ' + id);
@@ -83,7 +107,7 @@
         alert('Deleted ' + id);
       },
       getAsyncContent1: function (id, element) {
-        // Should be returned Promise for object with structure as below (for both resolve and reject).
+        // Should be returned Promise of object with structure as below (for both resolve and reject).
         // In practice network request to web api contains inside.
         return new Promise(function (resolve) {
           setTimeout(function () {
@@ -95,7 +119,7 @@
         });
       },
       getAsyncContent2: function (id, element) {
-        // Should be returned Promise for object with structure as below (for both resolve and reject).
+        // Should be returned Promise of object with structure as below (for both resolve and reject).
         // In practice network request to web api contains inside.
         return new Promise(function (resolve) {
           setTimeout(function () {
@@ -107,7 +131,7 @@
         });
       },
       getAsyncContent: function (id, element) {
-        // Should be returned Promise for object with structure as below (for both resolve and reject).
+        // Should be returned Promise of object with structure as below (for both resolve and reject).
         // In practice network request to web api contains inside.
         return new Promise(function (resolve) {
           setTimeout(function () {
