@@ -7,15 +7,33 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>msp-vue-components</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">-->
 
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.min.css">
+
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/app.config.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+    <script src="js/jarvis.widget.min.js"></script>
+    <script src="js/app.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        pageSetUp();
+      })
+    </script>
+
   </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but msp-vue-components doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+  <body class="desktop-detected">
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+
   </body>
 </html>

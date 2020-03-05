@@ -5,17 +5,19 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "build": "vue-cli-service build --target lib --name MspVueComponents .\\src\\MspVueComponents.js --dest www\\msp-vue --no-clean"
+    "buildTables": "vue-cli-service build --target lib --name MspDataTables .\\src\\components\\DataTable\\MspDataTables.js --dest www\\msp-vue --no-clean",
+    "buildForms": "vue-cli-service build --target lib --name MspForms .\\src\\components\\Forms\\MspForms.js --dest www\\msp-vue --no-clean"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
     "bootstrap": "^3.4.1",
+    "chosen-js": "^1.8.7",
     "core-js": "^3.4.4",
     "datatables.net": "^1.10.20",
     "datatables.net-bs": "^1.10.20",
     "datatables.net-buttons-bs": "^1.6.1",
-    "jquery": "^3.4.1",
-    "vue": "^2.6.10",
-    "@fortawesome/fontawesome-free": "^5.12.0"
+    "jquery": "^2.1.1",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",

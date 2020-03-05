@@ -5,26 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="favicon.ico">
-    <title>MspDataTable</title>
+    <title>MspDataTables</title>
     <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="msp-vue/MspVueComponents.css" />
+    <link rel="stylesheet" type="text/css" href="css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" href="css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.min.css">
+    <link rel="stylesheet" type="text/css" href="msp-vue/MspDataTables.css" />
 
     <script rel="script" type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script rel="script" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+
     <script rel="script" type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <script type="text/javascript" src="msp-vue/MspVueComponents.umd.min.js?v=3"></script>
+    <script type="text/javascript" src="msp-vue/MspDataTables.umd.min.js"></script>
+    <script type="text/javascript" src="msp-vue/MspForms.umd.min.js"></script>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but msp-data-table doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app" style="padding: 5px;">
-      <msp-data-table ref="dataTable" id="dt1" data-source-url="data/objects.txt" key-field="id"
+      <msp-data-table v-if="true" ref="dataTable" id="dt1" data-source-url="data/objects.txt" key-field="id"
                       refresh-button-icon="<i class='fas fa-sync'></i>"
                       search-button-icon="<i class='fas fa-search'></i>"
                       class-name="table table-striped table-bordered"
+                      selectable-rows not-select-field="position" not-select-value="Accountant"
                       selectable-rows
                       selected-row-icon="<i class='far fa-check-square'>"
                       unselected-row-icon="<i class='far fa-square'>"
@@ -71,59 +79,166 @@
       </p>
 
       <p>
-        <button type="button" class="btn btn-primary"
-                v-on:click="displaySelectedIds">
+        <button type="button" class="btn btn-primary" v-on:click="clickButton">
           <i class="fas fa-list-ol"></i> Get Selected IDs
         </button>
       </p>
+      <p>
+        <button type="button" class="btn btn-primary"
+                v-on:click="displayPopup=!displayPopup">
+          <i class="fas fa-list-ol"></i> Show Popup
+        </button>
+      </p>
 
-      <button id="refreshButton" type="button" class="btn btn-primary"
-              v-on:click="refresh">
-        <i class='fas fa-sync'></i> Refresh (this button is configured externally)
-      </button>
+      <a id="refreshButton" href="javascript:void(0);" class="btn btn-labeled btn-success"
+         v-on:click="refresh">
+        <span class="btn-label">
+          <i class="fas fa-sync"></i>
+        </span>Refresh (this button is configured externally)
+      </a>
+
+      <popup-form v-on:item-selected="onItemSelected" v-if="displayPopup">
+      </popup-form>
     </div>
+
+    <style type="text/css">
+      .popup-form {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -150px;
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+        border: #2c3e50 1px solid;
+        background-color: #eeeeee;
+      }
+    </style>
+    <script type="text/x-template" id="popup-form-template">
+      <div class="popup-form">
+        <msp-dropdown-list
+                :get-list-data="getListData"
+                v-on:item-selected="onItemSelected">
+        </msp-dropdown-list>
+        <p>
+          <msp-chosen data-placeholder="Select Cities..." multiple
+                      :get-list-data="getCities"
+          >
+          </msp-chosen>
+        </p>
+        <p>
+          <msp-button
+                  icon-class="fas fa-list-ol"
+                  type="success"
+                  v-on:click="clickButton">
+            Button
+          </msp-button>
+        </p>
+      </div>
+    </script>
 
     <!-- built files will be auto injected -->
     <script type="text/javascript">
       // noinspection JSUnresolvedVariable
-      let msp = MspVueComponents;
-      // noinspection JSValidateTypes
+      let forms = MspForms;
+      Vue.component('popup-form', {
+        components: {
+          'msp-dropdown-list': forms.MspDropdownList,
+          'msp-button': forms.MspButton,
+          'msp-chosen': forms.MspButton
+        },
+        template: '#popup-form-template',
+        methods: {
+          clickButton: function() {
+            alert('Button clicked');
+          },
+          getCities: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([{value: 0, text: "Toronto"}, {value: 1, text: "Orleans"}, {value: 2, text: "Denver"}, {value: 3, text:"London"}]);
+              }, 3000);
+            });
+          },
+          getListData: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([
+                  { 'value': "55", 'text': "Item55" },
+                  { 'value': "66", 'text': "Item66" },
+                  { 'value': "77", 'text': "Item77" },
+                  { 'value': "88", 'text': "Item88" }
+                ]);
+              }, 3000);
+            });
+          },
+          onItemSelected: function(item) {
+            this.$emit("item-selected", item)
+          },
+        }
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // noinspection JSUnresolvedVariable
+      let dt = MspDataTables;
       let app = new Vue ({
         el: '#app',
         components: {
-          'msp-column-template': msp.MspColumnTemplate,
-          'msp-column-action': msp.MspColumnAction,
-          'msp-async-content': msp.MspAsyncContent,
-          'msp-column': msp.MspColumn,
-          'msp-data-table': msp.MspDataTable
+          'msp-column-template': dt.MspColumnTemplate,
+          'msp-column-action': dt.MspColumnAction,
+          'msp-async-content': dt.MspAsyncContent,
+          'msp-column': dt.MspColumn,
+          'msp-data-table': dt.MspDataTable
         },
         data: function() {
           return {
-            selectedIds: ''
+            selectedIds: '',
+            displayPopup: false
           }
         },
         mounted: function(){
           // eslint-disable-next-line no-undef
-          this.$refs.dataTable.addActionElement($("#refreshButton"));
+          if (this.$refs.dataTable) this.$refs.dataTable.addActionElement($("#refreshButton"));
         },
         methods: {
           refresh: function(){
             this.$refs.dataTable.refresh();
           },
-          onRowSelected: function(ids){
-            this.selectedIds = ids.join(',');
+          onRowSelected: function(items){
+            this.selectedIds = items.map(i => i.id).join(',');
           },
-          displaySelectedIds: function() {
-            let ids = this.$refs.dataTable.getSelectedIds();
-            alert(ids.join(','));
+          clickButton: function() {
+            let items = this.$refs.dataTable.getSelectedItems();
+            // eslint-disable-next-line no-console
+            console.log(items);
+            if (items.length === 0)
+              alert("empty");
+            else
+              alert(items.map(i => i.id).join(','));
           },
-          onEmail: function (id) {
-            alert('EMailed to ' + id);
+          getListData: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([
+                  { 'value': "5", 'text': "Item5" },
+                  { 'value': "6", 'text': "Item6" },
+                  { 'value': "7", 'text': "Item7" },
+                  { 'value': "8", 'text': "Item8" }
+                ]);
+              }, 3000);
+            });
           },
-          onDelete: function (id) {
-            alert('Deleted ' + id);
+          onItemSelected: function(item) {
+            alert(item.text)
           },
-          getAsyncContent1: function (id, element) {
+          onEmail: function (model) {
+            alert('EMailed to ' + model.id);
+          },
+          onDelete: function (model) {
+            alert('Deleted ' + model.id);
+          },
+          getAsyncContent1: function (model, element) {
             // Should be returned Promise of object with structure as below (for both resolve and reject).
             // In practice network request to web api contains inside.
             return new Promise(function (resolve) {
@@ -135,7 +250,7 @@
               }, 1000);
             });
           },
-          getAsyncContent2: function (id, element) {
+          getAsyncContent2: function (model, element) {
             // Should be returned Promise of object with structure as below (for both resolve and reject).
             // In practice network request to web api contains inside.
             return new Promise(function (resolve) {
@@ -147,13 +262,13 @@
               }, 5000);
             });
           },
-          getAsyncContent: function (id, element) {
+          getAsyncContent: function (model, element) {
             // Should be returned Promise of object with structure as below (for both resolve and reject).
             // In practice network request to web api contains inside.
             return new Promise(function (resolve) {
               setTimeout(function () {
                 resolve({
-                  content: ', office ' + id,
+                  content: ', office ' + model.id,
                   element: element
                 });
               }, 2000);

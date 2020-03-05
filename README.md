@@ -6,7 +6,7 @@ Result you can see here: [mspdatatables.azurewebsites.net](https://mspdatatables
 
 ```HTML
 <div id="app" style="padding: 5px;">
-  <msp-data-table ref="dataTable" id="dt1" data-source-url="data/objects.txt" key-field="id"
+  <msp-data-table ref="dataTable" data-source-url="data/objects.txt"
                   refresh-button-icon="<i class='fas fa-sync'></i>"
                   search-button-icon="<i class='fas fa-search'></i>"
                   class-name="table table-striped table-bordered"
@@ -79,15 +79,15 @@ Functions related to your domain logic is placed to Vue.component.
 
 ```JavaScript
 <script type="text/javascript">
-  let msp = MspVueComponents;
+  let dt = MspDataTables;
   let app = new Vue ({
     el: '#app',
     components: {
-      'msp-column-template': msp.MspColumnTemplate,
-      'msp-column-action': msp.MspColumnAction,
-      'msp-async-content': msp.MspAsyncContent,
-      'msp-column': msp.MspColumn,
-      'msp-data-table': msp.MspDataTable
+      'msp-column-template': dt.MspColumnTemplate,
+      'msp-column-action': dt.MspColumnAction,
+      'msp-async-content': dt.MspAsyncContent,
+      'msp-column': dt.MspColumn,
+      'msp-data-table': dt.MspDataTables
     },
     data: function() {
       return {
@@ -101,20 +101,20 @@ Functions related to your domain logic is placed to Vue.component.
       refresh: function(){
         this.$refs.dataTable.refresh();
       },
-      onRowSelected: function(ids){
-        this.selectedIds = ids.join(',');
+      onRowSelected: function(items){
+        this.selectedIds = items.map(i => i.id).join(',');
       },
       displaySelectedIds: function() {
         let ids = this.$refs.dataTable.getSelectedIds();
         alert(ids.join(','));
       },
-      onEmail: function (id) {
-        alert('EMailed to ' + id);
+      onEmail: function (model) {
+        alert('EMailed to ' + model.id);
       },
-      onDelete: function (id) {
-        alert('Deleted ' + id);
+      onDelete: function (model) {
+        alert('Deleted ' + model.id);
       },
-      getAsyncContent1: function (id, element) {
+      getAsyncContent1: function (model, element) {
         // Should be returned Promise of object with structure as below (for both resolve and reject).
         // In practice network request to web api contains inside.
         return new Promise(function (resolve) {
@@ -126,7 +126,7 @@ Functions related to your domain logic is placed to Vue.component.
           }, 1000);
         });
       },
-      getAsyncContent2: function (id, element) {
+      getAsyncContent2: function (model, element) {
         // Should be returned Promise of object with structure as below (for both resolve and reject).
         // In practice network request to web api contains inside.
         return new Promise(function (resolve) {
@@ -138,13 +138,13 @@ Functions related to your domain logic is placed to Vue.component.
           }, 5000);
         });
       },
-      getAsyncContent: function (id, element) {
+      getAsyncContent: function (model, element) {
         // Should be returned Promise of object with structure as below (for both resolve and reject).
         // In practice network request to web api contains inside.
         return new Promise(function (resolve) {
           setTimeout(function () {
             resolve({
-              content: ', office ' + id,
+              content: ', office ' + model.id,
               element: element
             });
           }, 2000);

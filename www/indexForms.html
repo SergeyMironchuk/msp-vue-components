@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <title>MspDataTables</title>
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" href="css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" href="msp-vue/MspForms.css">
+
+    <script rel="script" type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script rel="script" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script rel="script" type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script type="text/javascript" src="msp-vue/MspForms.umd.min.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but msp-data-table doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app" style="padding: 5px;">
+      <p>
+        <msp-dropdown-list type="default"
+                :get-list-data="getListData"
+                v-on:item-selected="onItemSelected">
+        </msp-dropdown-list>
+      </p>
+      <p>
+        <msp-chosen data-placeholder="Select Cities..." multiple
+                    :get-list-data="getCities"
+        >
+        </msp-chosen>
+      </p>
+      <p>
+        <msp-button
+                icon-class="fas fa-list-ol"
+                type="success"
+                v-on:click="clickButton">
+          Button
+        </msp-button>
+      </p>
+
+      <p>
+        <msp-button type="default"
+                    icon-class="fas fa-list-ol"
+                v-on:click="displayPopup=!displayPopup">
+          Show Popup
+        </msp-button>
+      </p>
+
+      <popup-form v-on:item-selected="onItemSelected" v-if="displayPopup">
+      </popup-form>
+    </div>
+
+    <style type="text/css">
+      .popup-form {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -150px;
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+        border: #2c3e50 1px solid;
+        background-color: #eeeeee;
+      }
+    </style>
+    <script type="text/x-template" id="popup-form-template">
+      <div class="popup-form">
+        <p>
+          <msp-dropdown-list type="danger"
+                  :get-list-data="getListData"
+                  v-on:item-selected="onItemSelected">
+          </msp-dropdown-list>
+        </p>
+        <p>
+          <msp-chosen data-placeholder="Select Cities..." v-bind:get-list-data="getCities">
+          </msp-chosen>
+        </p>
+        <p>
+          <msp-button
+                  icon-class="fas fa-list-ol"
+                  type="success"
+                  v-on:click="clickButton">
+            Button
+          </msp-button>
+        </p>
+      </div>
+    </script>
+
+    <!-- built files will be auto injected -->
+    <script type="text/javascript">
+      // noinspection JSUnresolvedVariable
+      let forms = MspForms;
+      Vue.component('popup-form', {
+        components: {
+          'msp-dropdown-list': forms.MspDropdownList,
+          'msp-button': forms.MspButton,
+          'msp-chosen': forms.MspChosen
+        },
+        template: '#popup-form-template',
+        methods: {
+          clickButton: function() {
+            alert('Button clicked');
+          },
+          getCities: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([{value: 0, text: "Toronto"}, {value: 1, text: "Orleans"}, {value: 2, text: "Denver"}, {value: 3, text:"London"}]);
+              }, 3000);
+            });
+          },
+          getListData: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([
+                  { 'value': "55", 'text': "Item55" },
+                  { 'value': "66", 'text': "Item66" },
+                  { 'value': "77", 'text': "Item77" },
+                  { 'value': "88", 'text': "Item88" }
+                ]);
+              }, 3000);
+            });
+          },
+          onItemSelected: function(item) {
+            this.$emit("item-selected", item)
+          }
+        }
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // noinspection JSUnresolvedVariable
+      let app = new Vue ({
+        el: '#app',
+        components: {
+          'msp-dropdown-list': forms.MspDropdownList,
+          'msp-button': forms.MspButton,
+          'msp-chosen': forms.MspChosen
+        },
+        data: function() {
+          return {
+            selectedIds: '',
+            displayPopup: false
+          }
+        },
+        methods: {
+          clickButton: function() {
+            alert('Button clicked');
+          },
+          getCities: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([{value: 0, text: "Toronto"}, {value: 1, text: "Orleans"}, {value: 2, text: "Denver"}, {value: 3, text:"London"}]);
+              }, 3000);
+            });
+          },
+          getListData: function() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve([
+                  { 'value': "55", 'text': "Item55" },
+                  { 'value': "66", 'text': "Item66" },
+                  { 'value': "77", 'text': "Item77" },
+                  { 'value': "88", 'text': "Item88" }
+                ]);
+              }, 3000);
+            });
+          },
+          onItemSelected: function(item) {
+            this.$emit("item-selected", item)
+          }
+        }
+      })
+    </script>
+
+  </body>
+</html>
