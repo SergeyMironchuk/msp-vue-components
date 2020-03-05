@@ -105,8 +105,11 @@ Functions related to your domain logic is placed to Vue.component.
         this.selectedIds = items.map(i => i.id).join(',');
       },
       displaySelectedIds: function() {
-        let ids = this.$refs.dataTable.getSelectedIds();
-        alert(ids.join(','));
+        let items = this.$refs.dataTable.getSelectedItems();
+        if (items.length === 0)
+          alert("empty");
+        else
+          alert(items.map(i => i.id).join(','));
       },
       onEmail: function (model) {
         alert('EMailed to ' + model.id);
