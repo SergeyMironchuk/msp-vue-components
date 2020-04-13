@@ -1,12 +1,5 @@
 <!--suppress JSUnusedLocalSymbols -->
 <script>
-    import 'datatables.net-bs/css/dataTables.bootstrap.min.css'
-    import 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css'
-    import $ from 'jquery'
-    import 'datatables.net'
-    import 'datatables.net-bs'
-    import 'datatables.net-buttons-bs'
-    import 'datatables.net-buttons/js/buttons.colVis.js'
     import MspColumn from './MspColumn'
 
     const rowSelectorClass = 'row-selector';
@@ -32,12 +25,12 @@
             'hideTools': Boolean,
             'processingEnable': Boolean,
             'dataSourceMethod': String,
-            'refreshButtonIcon': {type: String, default: "<i class='fa fa-refresh'></i>"},
-            'searchButtonIcon': {type: String, default: "<i class='fa fa-search'></i>"},
+            'refreshButtonIcon': {type: String, default: "<i class='fas fa-sync'></i>"},
+            'searchButtonIcon': {type: String, default: "<i class='fas fa-search'></i>"},
             'selectableRows': Boolean,
-            'selectedRowIcon': {type: String, default: "<i class='fa fa-check-square-o'>"},
-            'unselectedRowIcon': {type: String, default: "<i class='fa fa-square-o'>"},
-            'existsSelectedRowsIcon': {type: String, default: "<i class='fa fa-square'></i>"}
+            'selectedRowIcon': {type: String, default: "<i class='far fa-check-square'>"},
+            'unselectedRowIcon': {type: String, default: "<i class='far fa-square'>"},
+            'existsSelectedRowsIcon': {type: String, default: "<i class='fas fa-square'></i>"}
         },
         render: function (createElement) {
             return createElement(
@@ -72,7 +65,9 @@
                 let dataTable = tableDomElement.DataTable();
                 dataTable.ajax.reload(() => {
                     dataTable.rows('.selected').nodes().to$().removeClass('selected');
+                    // eslint-disable-next-line no-undef
                     $(dataTable.table().header()).find("tr").removeClass('selected');
+                    // eslint-disable-next-line no-undef
                     dataTable.rows().nodes().each(row => setRowCheckedIcon($(row), this, dataTable));
                     dataTable.processing = false;
                     emitAboutSelectedRows(dataTable, this, tableDomElement);
@@ -101,7 +96,8 @@
                 "processing": this.processingEnable,
                 "language": {
                     "processing": `<i class="fa fa-spinner fa-1x fa-spin"></i>&nbsp;Processing...`,
-                    "loadingRecords": `<i class="fa fa-spinner fa-1x fa-spin"></i>&nbsp;Loading...`
+                    "loadingRecords": `<i class="fa fa-spinner fa-1x fa-spin"></i>&nbsp;Loading...`,
+                    "lengthMenu": '_MENU_'
                 },
                 "serverSide": isServerSide,
                 "ajax": {
@@ -112,20 +108,26 @@
                 order: this.selectableRows ? [[1, 'asc']] : [[0, 'asc']],
                 "columns": dataTableConfig.dtColumns,
                 "columnDefs": dataTableConfig.dtColumnDefs,
-                "buttons": ['colvis'],
+                "buttons": [{
+                    extend: 'colvis',
+                    text: 'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'btn-outline-default'
+                }],
                 "dom":
-                    `<"row no-gutters ${tableToolsDivClass}"
-                        <"col-sm-12 col-md-6 text-left"<"${tableFilterDivClass}">>
-                        <"col-sm-12 col-md-6 text-right"<"inlineBlock"B><"${refreshTableDivClass}">>
+                    `<"row ${tableToolsDivClass}"
+                        <"col-sm-12 col-md-6 d-flex align-items-center justify-content-start"<"${tableFilterDivClass}">>
+                        <"col-sm-12 col-md-6 d-flex align-items-center justify-content-end"l<"dt-buttons"B><"${refreshTableDivClass}">>
                     >
                     <"${tableActionsDivClass}">
                     rt
-                    <"row no-gutters"
-                        <"col-sm-12 col-md-6"l>
-                        <"col-sm-12 col-md-6"<"inlineBlock"i>p>
+                    <"row"
+                        <"col-sm-12 col-md-6"i>
+                        <"col-sm-12 col-md-6"p>
                     >`
             });
             tableDomElement.show();
+            tableDomElement.find('.has-tooltip').tooltip();
 
             let columnComponents = this.columns;
             createTableFilter(this, columnComponents, tableDomElement, dataTable);
@@ -136,6 +138,7 @@
             adjustTableToolbarElements(tableDomElement, tableComponent);
 
             tableDomElement.on('click', `[${actionIdAttribute}]`, function () {
+                // eslint-disable-next-line no-undef
                 let actionElement = $(this);
                 processClickEventOnActionElement(actionElement, dataTable, columnComponents);
             });
@@ -149,11 +152,10 @@
 
     function adjustTableToolbarElements(tableDomElement, tableComponent) {
         tableDomElement.parent().find('div.inlineBlock')
-            .css("display", "inline-block")
             .css("padding-left", "10px");
         tableDomElement.parent().find(`div.${tableActionsDivClass}`)
             .css("display", "inline-block")
-            .css("padding", "10px 0 0 0");
+            .css("padding", "10px 0 5px 0");
         if (tableComponent.hideTools) {
             tableDomElement.parent().find(`div.${tableToolsDivClass}`).hide()
         }
@@ -224,6 +226,7 @@
 
     function initRowSelecting(tableDomElement, dataTable, tableComponent) {
         tableDomElement.find('tbody').on('click', `tr>td>.${rowSelectorClass}`, function () {
+            // eslint-disable-next-line no-undef
             let tr = $(this).parent().parent();
             tr.toggleClass('selected');
             // noinspection JSUnresolvedFunction
@@ -231,6 +234,7 @@
             emitAboutSelectedRows(dataTable, tableComponent, tableDomElement);
         });
         tableDomElement.find('thead').on('click', `tr>th>.${rowSelectorClass}`, function () {
+            // eslint-disable-next-line no-undef
             let row = $(this).parent().parent();
             row.toggleClass('selected');
             // noinspection JSUnresolvedFunction
@@ -244,12 +248,14 @@
                 th.html(`<span class="${rowSelectorClass}">${tableComponent.unselectedRowIcon}</i></span>`);
                 dataTable.rows('.selected').nodes().to$().removeClass('selected');
             }
+            // eslint-disable-next-line no-undef
             dataTable.rows().nodes().each(row => setRowCheckedIcon($(row), tableComponent, dataTable));
             emitAboutSelectedRows(dataTable, tableComponent, tableDomElement);
         });
     }
 
     function getTableDomElement(tableComponent) {
+        // eslint-disable-next-line no-undef
         return $(tableComponent.$el);
     }
 
@@ -375,7 +381,9 @@
             let actionNumber = 0;
             columnComponent.actions.forEach(function (action) {
                 if (action.template) {
+                    // eslint-disable-next-line no-undef
                     let html = $.parseHTML(`<span>${action.template}&nbsp;</span>`);
+                    // eslint-disable-next-line no-undef
                     let htmlObject = $(html);
                     htmlObject.first().attr(`${actionIdAttribute}`, activeColumnNumber + "_" + actionNumber);
                     htmlObject.css('cursor', 'pointer');
@@ -396,35 +404,35 @@
         let columnsHtmlList = '';
         columnComponents.forEach(function (column) {
             // noinspection HtmlUnknownAttribute
-            columnsHtmlList += `<li><a href="#" value="${column.header}">${column.header}</a></li>`;
+            if (column.header) columnsHtmlList += `<a class="dropdown-item" href="#" value="${column.header}">${column.header}</a>`;
         });
         tableElement.parent().find('div.tableFilter').each(function () {
+            // eslint-disable-next-line no-undef
             let tableFilter = $(this);
             tableFilter.html(`
-                    <div class="input-group">
-                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-default main">Select column...</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 2px;">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
+                <div class="input-group">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary dropdown-toggle main" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select column...
                         </button>
-                        <ul class="dropdown-menu">
-                        ${columnsHtmlList}
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control" aria-label="...">
-                      <span class="input-group-btn">
+                        <div class="dropdown-menu">
+                            ${columnsHtmlList}
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="...">
+                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default search" style="margin-left: 2px;">
                             ${ tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : `<span class='${searchIconDefaultClass}' aria-hidden='true'></span>`}
                         </button>
-                      </span>
-                    </div>
-                    `);
+                    </span>
+                </div>
+                `);
             let filterButton = tableFilter.find('button.main');
             let filterElement = tableFilter.find('a');
             let filterInput = tableFilter.find('input');
             let filterSearchButton = tableFilter.find('button.search');
             filterElement.on('click', function () {
+                // eslint-disable-next-line no-undef
                 let value = $(this).attr('value');
                 filterButton.html(value);
                 filterSearchButton.off('click');
@@ -448,6 +456,7 @@
 
     function createTableRefreshButton(dataTable, tableComponent, tableDomElement){
         tableDomElement.parent().find('div.refreshTable').each(function () {
+            // eslint-disable-next-line no-undef
             let refreshTable = $(this);
             refreshTable.html(`
                     <div class="input-group">
@@ -483,6 +492,7 @@
     function getAsyncElementsOptions (tableDomElement, dataTable, columnComponents) {
         let asyncElements = [];
         tableDomElement.find(`[${asyncContentIdAttribute}]`).each(function () {
+            // eslint-disable-next-line no-undef
             let contentElement = $(this);
             let tr = contentElement.parents("tr");
             let model = dataTable.row(tr).data();
@@ -525,6 +535,7 @@
                             value.element.contentElement.html('');
                         } else {
                             value.element.contentElement.html(value.content);
+                            value.element.contentElement.find('.has-tooltip').tooltip();
                         }
                     }
             })
@@ -536,28 +547,17 @@
     }
 </script>
 <style>
-    /*noinspection CssUnusedSymbol*/
-    .row.no-gutters {
-        margin-right: 0;
-        margin-left: 0;
-    }
-    .row.no-gutters > [class*="col-"] {
-        padding-right: 0;
-        padding-left: 0;
+    .dataTables_length > label{
+        margin-bottom: 0;
+        padding-right: 3px;
     }
 
     /*noinspection ALL*/
-    tbody>tr.selected, .table-striped>tbody>tr:nth-of-type(odd).selected{
-        background-color: #aab7d1;
+    table.dataTable{
+        margin-bottom: 10px !important;
     }
 
-    table.dataTable thead .sorting_desc,
-    table.dataTable thead .sorting_asc,
-    table.dataTable thead .sorting
-    {
-        background: transparent no-repeat center right;
-    }
-
+/*
     div.dataTables_processing {
         position: absolute;
         top: 50%;
@@ -569,4 +569,5 @@
         text-align: center;
         padding: 1em 0;
     }
+*/
 </style>

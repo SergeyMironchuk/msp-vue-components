@@ -1,6 +1,6 @@
 <template>
-  <div>
-  <msp-jarvis-widget caption="Msp Controls examples" icon-class="fas fa-apple-alt">
+  <div style="padding: 5px;">
+  <msp-panel caption="Msp Controls examples">
     <form class="form-horizontal">
       <fieldset>
         <msp-chosen data-placeholder="Select Cities..."
@@ -22,37 +22,13 @@
         </div>
       </fieldset>
     </form>
-    <p>
-      {{ selectedItem }}
-    </p>
-    <p>
-      {{ selectedCities }}
-    </p>
-    <p>
-      {{ selectedCity }}
-    </p>
-  </msp-jarvis-widget>
-
-    <span style="margin-left: 5px; margin-right: 5px;"><i class="far fa-copy" @click="doCopyAll"></i></span>
-    <i v-if="loading" class='fas fa-spinner fa-spin' />
-    <div style="width: 100%; height: 300px; overflow: auto; padding: 5px; margin-bottom: 5px;">
-      <table style="width: 100%;" class="table table-hover table-bordered">
-        <tbody>
-        <tr v-for="logItem in logItems" v-bind:key="logItem.id">
-          <td style="width: 30px;">{{ logItem.id }}</td>
-          <td>{{ logItem.text }}</td>
-          <td style="width: 30px; text-align: center;" title="Copy row to clipboard"><i class="far fa-copy" @click="doCopy(logItem.text)"></i></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+  </msp-panel>
 
   <button class="btn btn-primary btn-default" data-toggle="modal" data-target="#myModal">
     Launch demo modal
   </button>
 
-  <msp-modal-dialog id="myModal" caption="Modal dialog" v-on:ok="saveFormData">
-
+  <msp-modal-dialog id="myModal" caption="Modal dialog" v-on:ok="saveFormData" width="800px">
     <form class="form-horizontal">
       <fieldset>
         <msp-dropdown-list :get-list-data="getListData"
@@ -85,8 +61,8 @@
   //import '@fortawesome/fontawesome-free/css/all.css'
   import MspDropdownList from "./components/Forms/MspDropdownList.vue";
   import MspButton from "./components/Forms/MspButton.vue";
+  import MspPanel from "./components/Forms/MspPanel";
   import MspChosen from "./components/Forms/MspChosen";
-  import MspJarvisWidget from "./components/Forms/MspJarvisWidget";
   import MspModalDialog from "./components/Forms/MspModalDialog";
   // eslint-disable-next-line no-unused-vars
   import Vue from 'vue';
@@ -97,11 +73,11 @@
   export default {
     name: 'app',
     components: {
-      MspChosen,
       MspDropdownList,
       MspButton,
-      MspJarvisWidget,
-      MspModalDialog
+      MspPanel,
+      MspModalDialog,
+      MspChosen
     },
     data: function(){
       return {
@@ -117,7 +93,7 @@
       }
     },
     mounted: function() {
-      this.genLogList();
+      //this.genLogList();
     },
     methods: {
       doCopy: function (text) {
@@ -186,7 +162,8 @@
         });
       },
       onItemSelected: function(item) {
-        alert(item.text)
+        // eslint-disable-next-line no-console
+        console.log(item.text)
       },
       onCitySelected: function(item) {
         alert(item)

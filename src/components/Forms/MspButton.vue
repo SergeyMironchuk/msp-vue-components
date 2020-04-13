@@ -1,7 +1,7 @@
 <template>
-    <a href="#" v-bind:class="'btn btn-labeled btn-'+(buttonType ? buttonType : 'default')"
+    <a href="#" v-bind:class="'btn waves-effect waves-themed btn-'+(buttonType ? buttonType : 'default')"
        v-on:click="$emit('click')">
-        <span class="btn-label"><i v-bind:class="iconClass"/></span>
+        <span v-bind:class="'mr-2 '+iconClass"></span>
         <slot/>
     </a>
 </template>
