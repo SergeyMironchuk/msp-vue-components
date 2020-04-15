@@ -1,9 +1,13 @@
 <template>
   <div id="app" style="padding: 5px;">
-    <msp-data-table ref="dataTable" data-source-url="data/objects.txt"
-                    processing-enable
-                    class-name="table table-striped table-bordered table-hover "
-                    selectable-rows not-select-field="position" not-select-value="Accountant"
+    <msp-data-table ref="dataTable" data-source-url="data/objectsShort.txt"
+                      processing-enable id-data-field="id" page-length="25"
+                    refresh-button-icon="<i class='fas fa-sync'></i>"
+                    search-button-icon="<i class='fas fa-search'></i>"
+                    class-name="table table-striped table-bordered"
+                    selected-row-icon="<i class='far fa-check-square'>"
+                    unselected-row-icon="<i class='far fa-square'>"
+                    exists-selected-rows-icon="<i class='fas fa-square'></i>"
                     v-on:row-selected="onRowSelected">
       <msp-column header="name" model-property="name" sortable>
         <msp-column-template>
@@ -49,6 +53,11 @@
       </msp-button>
     </p>
     <p>
+      <msp-button button-type="default" icon-class="fas fa-sync" v-on:click="rowsOperation">
+        Rows operation
+      </msp-button>
+    </p>
+    <p>
       <label>External things:</label>
       <br/>
       <span>Selected Ids: {{selectedIds}}</span>
@@ -82,6 +91,7 @@
     data: function() {
         return {
           selectedIds: '',
+          selectedItems: [],
           selectedCities: ["2"],
           selectedCity: "3",
           selectedItem: "7",
@@ -102,6 +112,7 @@
       },
       onRowSelected: function(items){
         this.selectedIds = items.map(i => i.id).join(',');
+        this.selectedItems = items;
       },
       showSelectedItems: function() {
         let items = this.$refs.dataTable.getSelectedItems();
@@ -111,6 +122,39 @@
           alert("empty");
         else
           alert(items.map(i => i.id).join(','));
+      },
+      rowsOperation: function(){
+        this.$refs.dataTable.updateTableItems([
+          {
+            "id": "5",
+            "name": "Thor Walton",
+            "position": "Developer",
+            "salary": "$98,540",
+            "start_date": "2013/08/11",
+            "office": "New York",
+            "extn": "8327"
+          },
+          {
+            "id": "46",
+            "name": "Finn Camacho",
+            "position": "Support Engineer",
+            "salary": "$87,500",
+            "start_date": "2009/07/07",
+            "office": "San Francisco",
+            "extn": "2927"
+          },
+          {
+            "id": "47",
+            "name": "Serge Baldwin",
+            "position": "Data Coordinator",
+            "salary": "$138,575",
+            "start_date": "2012/04/09",
+            "office": "Singapore",
+            "extn": "8352"
+          }
+        ], function(item, tableItem){
+          tableItem.name = item.name;
+        })
       },
       getListData: function() {
         return new Promise(function (resolve) {

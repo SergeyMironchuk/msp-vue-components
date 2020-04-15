@@ -25,6 +25,8 @@
         name: "MspDataTable",
         props: {
             'dataSourceUrl': {type: String, default: ""},
+            'pageLength': Number,
+            'idDataField': String,
             'notSelectField': String,
             'notSelectValue': String,
             'className': String,
@@ -88,6 +90,41 @@
                 let tableDomElement = getTableDomElement(this);
                 let dataTable = tableDomElement.DataTable();
                 return getSelectedRowsItems(dataTable);
+            },
+            updateTableItems: function(newItems, changeItemPropertiesFunction){
+                let tableDomElement = getTableDomElement(this);
+                let dataTable = tableDomElement.DataTable();
+                let tableComponent = this;
+                let rowsForAdd = [];
+                newItems.forEach(item => {
+                    let tableItem = null;
+                    dataTable.rows().every(function(){
+                        let row = this;
+                        if (row.data() && row.id() === item[tableComponent.idDataField]){
+                            tableItem = row.data();
+                            changeItemPropertiesFunction(item, tableItem);
+                            row.invalidate();
+                        }
+                    });
+                    if (!tableItem){
+                        rowsForAdd.push(item);
+                    }
+                });
+                dataTable.rows().eq(0).each(function(idx){
+                    let row = dataTable.row(idx);
+                    let removeNeed = true;
+                    newItems.forEach(item => {
+                        if (row.data() && row.id() === item[tableComponent.idDataField]){
+                            removeNeed = false;
+                        }
+                    });
+                    if (removeNeed){
+                        $(row.node()).addClass("for-remove");
+                    }
+                });
+                dataTable.rows('.for-remove').remove();
+                rowsForAdd.forEach(row => dataTable.row.add(row));
+                dataTable.draw(false);
             }
         },
         mounted: function () {
@@ -99,9 +136,13 @@
             let method = this.dataSourceMethod ? this.dataSourceMethod : "GET";
             let dataTable = tableDomElement.DataTable({
                 "processing": this.processingEnable,
+                "rowId": this.idDataField,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "pageLength": this.pageLength,
                 "language": {
                     "processing": `<i class="fa fa-spinner fa-1x fa-spin"></i>&nbsp;Processing...`,
-                    "loadingRecords": `<i class="fa fa-spinner fa-1x fa-spin"></i>&nbsp;Loading...`
+                    "loadingRecords": `<i class="fa fa-spinner fa-1x fa-spin"></i>&nbsp;Loading...`,
+                    "lengthMenu": '_MENU_'
                 },
                 "serverSide": isServerSide,
                 "ajax": {
@@ -109,20 +150,23 @@
                     "type": isServerSide ? "POST" : method,
                     "dataType": "json"
                 },
-                order: this.selectableRows ? [[1, 'asc']] : [[0, 'asc']],
+                "order": this.selectableRows ? [[1, 'asc']] : [[0, 'asc']],
                 "columns": dataTableConfig.dtColumns,
                 "columnDefs": dataTableConfig.dtColumnDefs,
-                "buttons": ['colvis'],
+                "buttons": [{
+                    extend: 'colvis',
+                    text: 'Show / hide columns'
+                }],
                 "dom":
                     `<"row no-gutters ${tableToolsDivClass}"
                         <"col-sm-12 col-md-6 text-left"<"${tableFilterDivClass}">>
-                        <"col-sm-12 col-md-6 text-right"<"inlineBlock"B><"${refreshTableDivClass}">>
+                        <"col-sm-12 col-md-6 text-right"<"pageSizeBlock"l><"inlineBlock"B><"${refreshTableDivClass}">>
                     >
                     <"${tableActionsDivClass}">
                     rt
                     <"row no-gutters"
-                        <"col-sm-12 col-md-6"l>
-                        <"col-sm-12 col-md-6"<"inlineBlock"i>p>
+                        <"col-sm-12 col-md-6"i>
+                        <"col-sm-12 col-md-6"<"inlineBlock">p>
                     >`
             });
             tableDomElement.show();
@@ -150,7 +194,15 @@
     function adjustTableToolbarElements(tableDomElement, tableComponent) {
         tableDomElement.parent().find('div.inlineBlock')
             .css("display", "inline-block")
-            .css("padding-left", "10px");
+            .css("padding-left", "3px");
+        let pageSizeBlock = tableDomElement.parent().find('div.pageSizeBlock');
+        pageSizeBlock
+            .css("display", "inline-block")
+            .css("padding-left", "53px")
+            .css("margin-bottom", "-12px");
+         pageSizeBlock.find('select')
+             .css("background", "#868686")
+             .css("color", "white");
         tableDomElement.parent().find(`div.${tableActionsDivClass}`)
             .css("display", "inline-block")
             .css("padding", "10px 0 0 0");
@@ -185,6 +237,7 @@
     }
 
     function setRowCheckedIcon(row, tableComponent, dataTable) {
+        if (!tableComponent.selectableRows) return;
         let data = dataTable.row(row).data();
         let td = row.children('td').first();
         if (row.hasClass('selected')) {
@@ -199,6 +252,7 @@
     }
 
     function updateSelectIconInHeader(tableDomElement, dataTable, tableComponent) {
+        if (!tableComponent.selectableRows) return;
         let selectedRowsLength = dataTable.rows('.selected').nodes().length;
         let hr = tableDomElement.find('thead>tr').first();
         let th = hr.find('th').first();
