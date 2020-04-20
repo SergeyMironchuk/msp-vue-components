@@ -29165,44 +29165,39 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
 /* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("4e82");
 /* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("a9e3");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("d3b7");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("e6cf");
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("3ca3");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("5319");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("841c");
-/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("1276");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("498a");
-/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("159b");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("ddb0");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var datatables_net_bs_css_dataTables_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__("c0d8");
-/* harmony import */ var datatables_net_bs_css_dataTables_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs_css_dataTables_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var datatables_net_buttons_bs_css_buttons_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__("4f1e");
-/* harmony import */ var datatables_net_buttons_bs_css_buttons_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_bs_css_buttons_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__("1157");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var datatables_net__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__("1653");
-/* harmony import */ var datatables_net__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(datatables_net__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var datatables_net_bs__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__("036f");
-/* harmony import */ var datatables_net_bs__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs__WEBPACK_IMPORTED_MODULE_24__);
-/* harmony import */ var datatables_net_buttons_bs__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__("4280");
-/* harmony import */ var datatables_net_buttons_bs__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_bs__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var datatables_net_buttons_js_buttons_colVis_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__("3203");
-/* harmony import */ var datatables_net_buttons_js_buttons_colVis_js__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_js_buttons_colVis_js__WEBPACK_IMPORTED_MODULE_26__);
-/* harmony import */ var _MspColumn__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__("74f5");
-
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("d3b7");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("e6cf");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("ac1f");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("3ca3");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("5319");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("841c");
+/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("1276");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("498a");
+/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("159b");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("ddb0");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var datatables_net_bs_css_dataTables_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("c0d8");
+/* harmony import */ var datatables_net_bs_css_dataTables_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs_css_dataTables_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var datatables_net_buttons_bs_css_buttons_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__("4f1e");
+/* harmony import */ var datatables_net_buttons_bs_css_buttons_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_bs_css_buttons_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__("1157");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var datatables_net_bs__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__("036f");
+/* harmony import */ var datatables_net_bs__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var datatables_net_buttons_bs__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__("4280");
+/* harmony import */ var datatables_net_buttons_bs__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_bs__WEBPACK_IMPORTED_MODULE_23__);
+/* harmony import */ var datatables_net_buttons_js_buttons_colVis_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__("3203");
+/* harmony import */ var datatables_net_buttons_js_buttons_colVis_js__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(datatables_net_buttons_js_buttons_colVis_js__WEBPACK_IMPORTED_MODULE_24__);
+/* harmony import */ var _MspColumn__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__("74f5");
 
 
 
@@ -29230,7 +29225,6 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
 
 
 
-
 var rowSelectorClass = 'row-selector';
 var rowSelectedEvent = 'row-selected';
 var tableRefreshedEvent = 'table-refreshed';
@@ -29249,7 +29243,7 @@ var tableActionsDivClass = 'actions';
       type: String,
       default: ""
     },
-    'pageLength': Number,
+    'pageLength': String,
     'idDataField': String,
     'notSelectField': String,
     'notSelectValue': String,
@@ -29290,7 +29284,7 @@ var tableActionsDivClass = 'actions';
     }, this.$slots.default);
   },
   components: {
-    'msp-column': _MspColumn__WEBPACK_IMPORTED_MODULE_27__[/* default */ "a"]
+    'msp-column': _MspColumn__WEBPACK_IMPORTED_MODULE_25__[/* default */ "a"]
   },
   data: function data() {
     return {
@@ -29311,9 +29305,9 @@ var tableActionsDivClass = 'actions';
       var dataTable = tableDomElement.DataTable();
       dataTable.ajax.reload(function () {
         dataTable.rows('.selected').nodes().to$().removeClass('selected');
-        jquery__WEBPACK_IMPORTED_MODULE_22___default()(dataTable.table().header()).find("tr").removeClass('selected');
+        jquery__WEBPACK_IMPORTED_MODULE_21___default()(dataTable.table().header()).find("tr").removeClass('selected');
         dataTable.rows().nodes().each(function (row) {
-          return setRowCheckedIcon(jquery__WEBPACK_IMPORTED_MODULE_22___default()(row), _this, dataTable);
+          return setRowCheckedIcon(jquery__WEBPACK_IMPORTED_MODULE_21___default()(row), _this, dataTable);
         });
         dataTable.processing = false;
         emitAboutSelectedRows(dataTable, _this, tableDomElement);
@@ -29361,7 +29355,7 @@ var tableActionsDivClass = 'actions';
         });
 
         if (removeNeed) {
-          jquery__WEBPACK_IMPORTED_MODULE_22___default()(row.node()).addClass("for-remove");
+          jquery__WEBPACK_IMPORTED_MODULE_21___default()(row.node()).addClass("for-remove");
         }
       });
       dataTable.rows('.for-remove').remove();
@@ -29369,6 +29363,14 @@ var tableActionsDivClass = 'actions';
         return dataTable.row.add(row);
       });
       dataTable.draw(false);
+    },
+    startRefreshSpin: function startRefreshSpin() {
+      var tableDomElement = getTableDomElement(this);
+      tableDomElement.parent().find("div.".concat(refreshTableDivClass)).find("button > i").addClass(" fa-spin");
+    },
+    stopRefreshSpin: function stopRefreshSpin() {
+      var tableDomElement = getTableDomElement(this);
+      tableDomElement.parent().find("div.".concat(refreshTableDivClass)).find("button > i").removeClass(" fa-spin");
     }
   },
   mounted: function mounted() {
@@ -29399,9 +29401,7 @@ var tableActionsDivClass = 'actions';
       "columnDefs": dataTableConfig.dtColumnDefs,
       "buttons": [{
         extend: 'colvis',
-        text: 'Show / hide columns',
-        titleAttr: 'Col visibility',
-        className: 'btn-outline-default'
+        text: 'Show / hide columns'
       }],
       "dom": "<\"row no-gutters ".concat(tableToolsDivClass, "\"\n                    <\"col-sm-12 col-md-6 text-left\"<\"").concat(tableFilterDivClass, "\">>\n                    <\"col-sm-12 col-md-6 text-right\"<\"pageSizeBlock\"l><\"inlineBlock\"B><\"").concat(refreshTableDivClass, "\">>\n                >\n                <\"").concat(tableActionsDivClass, "\">\n                rt\n                <\"row no-gutters\"\n                    <\"col-sm-12 col-md-6\"i>\n                    <\"col-sm-12 col-md-6\"<\"inlineBlock\">p>\n                >")
     });
@@ -29413,7 +29413,7 @@ var tableActionsDivClass = 'actions';
     initRowSelecting(tableDomElement, dataTable, tableComponent);
     adjustTableToolbarElements(tableDomElement, tableComponent);
     tableDomElement.on('click', "[".concat(actionIdAttribute, "]"), function () {
-      var actionElement = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this);
+      var actionElement = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this);
       processClickEventOnActionElement(actionElement, dataTable, columnComponents);
     });
     dataTable.on('draw', function () {
@@ -29500,14 +29500,14 @@ function getSelectedRowsItems(dataTable) {
 
 function initRowSelecting(tableDomElement, dataTable, tableComponent) {
   tableDomElement.find('tbody').on('click', "tr>td>.".concat(rowSelectorClass), function () {
-    var tr = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this).parent().parent();
+    var tr = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this).parent().parent();
     tr.toggleClass('selected'); // noinspection JSUnresolvedFunction
 
     setRowCheckedIcon(tr, tableComponent, dataTable);
     emitAboutSelectedRows(dataTable, tableComponent, tableDomElement);
   });
   tableDomElement.find('thead').on('click', "tr>th>.".concat(rowSelectorClass), function () {
-    var row = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this).parent().parent();
+    var row = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this).parent().parent();
     row.toggleClass('selected'); // noinspection JSUnresolvedFunction
 
     var th = row.children('th').first();
@@ -29523,14 +29523,14 @@ function initRowSelecting(tableDomElement, dataTable, tableComponent) {
     }
 
     dataTable.rows().nodes().each(function (row) {
-      return setRowCheckedIcon(jquery__WEBPACK_IMPORTED_MODULE_22___default()(row), tableComponent, dataTable);
+      return setRowCheckedIcon(jquery__WEBPACK_IMPORTED_MODULE_21___default()(row), tableComponent, dataTable);
     });
     emitAboutSelectedRows(dataTable, tableComponent, tableDomElement);
   });
 }
 
 function getTableDomElement(tableComponent) {
-  return jquery__WEBPACK_IMPORTED_MODULE_22___default()(tableComponent.$el);
+  return jquery__WEBPACK_IMPORTED_MODULE_21___default()(tableComponent.$el);
 }
 
 function createAsyncElements(tableDomElement, dataTable, columnComponents) {
@@ -29654,8 +29654,8 @@ function prepareDataTableOptions(columnComponents, tableComponent) {
     var actionNumber = 0;
     columnComponent.actions.forEach(function (action) {
       if (action.template) {
-        var html = jquery__WEBPACK_IMPORTED_MODULE_22___default.a.parseHTML("<span>".concat(action.template, "&nbsp;</span>"));
-        var htmlObject = jquery__WEBPACK_IMPORTED_MODULE_22___default()(html);
+        var html = jquery__WEBPACK_IMPORTED_MODULE_21___default.a.parseHTML("<span>".concat(action.template, "&nbsp;</span>"));
+        var htmlObject = jquery__WEBPACK_IMPORTED_MODULE_21___default()(html);
         htmlObject.first().attr("".concat(actionIdAttribute), activeColumnNumber + "_" + actionNumber);
         htmlObject.css('cursor', 'pointer');
         actionTemplates += htmlObject.prop('outerHTML');
@@ -29676,14 +29676,14 @@ function createTableFilter(tableComponent, columnComponents, tableElement, dataT
     columnsHtmlList += "<li><a href=\"#\" value=\"".concat(column.header, "\">").concat(column.header, "</a></li>");
   });
   tableElement.parent().find('div.tableFilter').each(function () {
-    var tableFilter = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this);
+    var tableFilter = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this);
     tableFilter.html("\n                <div class=\"input-group\">\n                  <div class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default main\">Select column...</button>\n                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" style=\"margin-right: 2px;\">\n                        <span class=\"caret\"></span>\n                        <span class=\"sr-only\">Toggle Dropdown</span>\n                    </button>\n                    <ul class=\"dropdown-menu\">\n                    ".concat(columnsHtmlList, "\n                    </ul>\n                  </div>\n                  <input type=\"text\" class=\"form-control\" aria-label=\"...\">\n                  <span class=\"input-group-btn\">\n                    <button type=\"button\" class=\"btn btn-default search\" style=\"margin-left: 2px;\">\n                        ").concat(tableComponent.searchButtonIcon ? tableComponent.searchButtonIcon : "<span class='".concat(searchIconDefaultClass, "' aria-hidden='true'></span>"), "\n                    </button>\n                  </span>\n                </div>\n                "));
     var filterButton = tableFilter.find('button.main');
     var filterElement = tableFilter.find('a');
     var filterInput = tableFilter.find('input');
     var filterSearchButton = tableFilter.find('button.search');
     filterElement.on('click', function () {
-      var value = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this).attr('value');
+      var value = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this).attr('value');
       filterButton.html(value);
       filterSearchButton.off('click');
       dataTable.columns().every(function () {
@@ -29691,7 +29691,7 @@ function createTableFilter(tableComponent, columnComponents, tableElement, dataT
         column.search('');
         var header = column.header(); // eslint-disable-next-line no-undef
 
-        var title = jquery__WEBPACK_IMPORTED_MODULE_22___default()(header).html();
+        var title = jquery__WEBPACK_IMPORTED_MODULE_21___default()(header).html();
 
         if (title === filterButton.html()) {
           filterSearchButton.on('click', function () {
@@ -29706,7 +29706,7 @@ function createTableFilter(tableComponent, columnComponents, tableElement, dataT
 
 function createTableRefreshButton(dataTable, tableComponent, tableDomElement) {
   tableDomElement.parent().find('div.refreshTable').each(function () {
-    var refreshTable = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this);
+    var refreshTable = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this);
     refreshTable.html("\n                <div class=\"input-group\">\n                    <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 2px;\">\n                        ".concat(tableComponent.refreshButtonIcon ? tableComponent.refreshButtonIcon : "<span class='".concat(refreshIconDefaultClass, "' aria-hidden='true'></span>"), "\n                    </button>\n                </div>\n                "));
     var refreshTableButton = refreshTable.find('button');
     refreshTableButton.on('click', function () {
@@ -29737,7 +29737,7 @@ function processClickEventOnActionElement(actionElement, dataTable, columnCompon
 function getAsyncElementsOptions(tableDomElement, dataTable, columnComponents) {
   var asyncElements = [];
   tableDomElement.find("[".concat(asyncContentIdAttribute, "]")).each(function () {
-    var contentElement = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this);
+    var contentElement = jquery__WEBPACK_IMPORTED_MODULE_21___default()(this);
     var tr = contentElement.parents("tr");
     var model = dataTable.row(tr).data();
     var contentId = contentElement.attr("".concat(asyncContentIdAttribute));
@@ -30016,30 +30016,6 @@ var TEMPLATE = String(String).split('String');
 })(Function.prototype, 'toString', function toString() {
   return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
 });
-
-
-/***/ }),
-
-/***/ "7156":
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__("861d");
-var setPrototypeOf = __webpack_require__("d2bb");
-
-// makes subclassing work correct for wrapped built-ins
-module.exports = function ($this, dummy, Wrapper) {
-  var NewTarget, NewTargetPrototype;
-  if (
-    // it can work only with native `setPrototypeOf`
-    setPrototypeOf &&
-    // we haven't completely correct pre-ES6 way for getting `new.target`, so use this
-    typeof (NewTarget = dummy.constructor) == 'function' &&
-    NewTarget !== Wrapper &&
-    isObject(NewTargetPrototype = NewTarget.prototype) &&
-    NewTargetPrototype !== Wrapper.prototype
-  ) setPrototypeOf($this, NewTargetPrototype);
-  return $this;
-};
 
 
 /***/ }),
@@ -30938,92 +30914,6 @@ var floor = Math.floor;
 module.exports = function (argument) {
   return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
 };
-
-
-/***/ }),
-
-/***/ "a9e3":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__("83ab");
-var global = __webpack_require__("da84");
-var isForced = __webpack_require__("94ca");
-var redefine = __webpack_require__("6eeb");
-var has = __webpack_require__("5135");
-var classof = __webpack_require__("c6b6");
-var inheritIfRequired = __webpack_require__("7156");
-var toPrimitive = __webpack_require__("c04e");
-var fails = __webpack_require__("d039");
-var create = __webpack_require__("7c73");
-var getOwnPropertyNames = __webpack_require__("241c").f;
-var getOwnPropertyDescriptor = __webpack_require__("06cf").f;
-var defineProperty = __webpack_require__("9bf2").f;
-var trim = __webpack_require__("58a8").trim;
-
-var NUMBER = 'Number';
-var NativeNumber = global[NUMBER];
-var NumberPrototype = NativeNumber.prototype;
-
-// Opera ~12 has broken Object#toString
-var BROKEN_CLASSOF = classof(create(NumberPrototype)) == NUMBER;
-
-// `ToNumber` abstract operation
-// https://tc39.github.io/ecma262/#sec-tonumber
-var toNumber = function (argument) {
-  var it = toPrimitive(argument, false);
-  var first, third, radix, maxCode, digits, length, index, code;
-  if (typeof it == 'string' && it.length > 2) {
-    it = trim(it);
-    first = it.charCodeAt(0);
-    if (first === 43 || first === 45) {
-      third = it.charCodeAt(2);
-      if (third === 88 || third === 120) return NaN; // Number('+0x1') should be NaN, old V8 fix
-    } else if (first === 48) {
-      switch (it.charCodeAt(1)) {
-        case 66: case 98: radix = 2; maxCode = 49; break; // fast equal of /^0b[01]+$/i
-        case 79: case 111: radix = 8; maxCode = 55; break; // fast equal of /^0o[0-7]+$/i
-        default: return +it;
-      }
-      digits = it.slice(2);
-      length = digits.length;
-      for (index = 0; index < length; index++) {
-        code = digits.charCodeAt(index);
-        // parseInt parses a string to a first unavailable symbol
-        // but ToNumber should return NaN if a string contains unavailable symbols
-        if (code < 48 || code > maxCode) return NaN;
-      } return parseInt(digits, radix);
-    }
-  } return +it;
-};
-
-// `Number` constructor
-// https://tc39.github.io/ecma262/#sec-number-constructor
-if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumber('+0x1'))) {
-  var NumberWrapper = function Number(value) {
-    var it = arguments.length < 1 ? 0 : value;
-    var dummy = this;
-    return dummy instanceof NumberWrapper
-      // check on 1..constructor(foo) case
-      && (BROKEN_CLASSOF ? fails(function () { NumberPrototype.valueOf.call(dummy); }) : classof(dummy) != NUMBER)
-        ? inheritIfRequired(new NativeNumber(toNumber(it)), dummy, NumberWrapper) : toNumber(it);
-  };
-  for (var keys = DESCRIPTORS ? getOwnPropertyNames(NativeNumber) : (
-    // ES3:
-    'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +
-    // ES2015 (in case, if modules with ES2015 Number statics required before):
-    'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +
-    'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger'
-  ).split(','), j = 0, key; keys.length > j; j++) {
-    if (has(NativeNumber, key = keys[j]) && !has(NumberWrapper, key)) {
-      defineProperty(NumberWrapper, key, getOwnPropertyDescriptor(NativeNumber, key));
-    }
-  }
-  NumberWrapper.prototype = NumberPrototype;
-  NumberPrototype.constructor = NumberWrapper;
-  redefine(global, NUMBER, NumberWrapper);
-}
 
 
 /***/ }),

@@ -1,7 +1,7 @@
 <template>
     <section id="widget-grid" class="" style="padding: 5px;">
         <!-- Widget ID (each widget will need unique ID)-->
-        <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false"
+        <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false"
              data-widget-deletebutton="false" data-widget-togglebutton="false">
             <!-- widget options:
             usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
@@ -17,7 +17,6 @@
 
             -->
             <header>
-                <span class="widget-icon"> <i v-bind:class="iconClass"></i> </span>
                 <h2>{{caption}}</h2>
             </header>
             <!-- widget div-->

@@ -3,7 +3,6 @@
     import 'datatables.net-bs/css/dataTables.bootstrap.min.css'
     import 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css'
     import $ from 'jquery'
-    import 'datatables.net'
     import 'datatables.net-bs'
     import 'datatables.net-buttons-bs'
     import 'datatables.net-buttons/js/buttons.colVis.js'
@@ -25,7 +24,7 @@
         name: "MspDataTable",
         props: {
             'dataSourceUrl': {type: String, default: ""},
-            'pageLength': Number,
+            'pageLength': String,
             'idDataField': String,
             'notSelectField': String,
             'notSelectValue': String,
@@ -125,6 +124,14 @@
                 dataTable.rows('.for-remove').remove();
                 rowsForAdd.forEach(row => dataTable.row.add(row));
                 dataTable.draw(false);
+            },
+            startRefreshSpin: function(){
+                let tableDomElement = getTableDomElement(this);
+                tableDomElement.parent().find(`div.${refreshTableDivClass}`).find("button > i").addClass(" fa-spin")
+            },
+            stopRefreshSpin: function(){
+                let tableDomElement = getTableDomElement(this);
+                tableDomElement.parent().find(`div.${refreshTableDivClass}`).find("button > i").removeClass(" fa-spin")
             }
         },
         mounted: function () {

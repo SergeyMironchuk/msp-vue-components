@@ -1,6 +1,6 @@
 <template>
   <div>
-  <msp-jarvis-widget caption="Msp Controls examples" icon-class="fas fa-apple-alt">
+  <msp-jarvis-widget ref="jarvis" caption="Msp Controls examples" icon-class="fas fa-apple-alt">
     <form class="form-horizontal">
       <fieldset>
         <msp-chosen data-placeholder="Select Cities..."
@@ -157,6 +157,7 @@
       },
       clickButton: function() {
         alert('Button clicked');
+        this.$refs.jarvis.showLoadIcon();
       },
       saveFormData: function(){
         alert("OK");
