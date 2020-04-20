@@ -18,7 +18,7 @@
         name: "MspDataTable",
         props: {
             'dataSourceUrl': {type: String, default: ""},
-            'pageLength': Number,
+            'pageLength': String,
             'idDataField': String,
             'notSelectField': String,
             'notSelectValue': String,
@@ -121,6 +121,14 @@
                 dataTable.rows('.for-remove').remove();
                 rowsForAdd.forEach(row => dataTable.row.add(row));
                 dataTable.draw(false);
+            },
+            startRefreshSpin: function(){
+                let tableDomElement = getTableDomElement(this);
+                tableDomElement.parent().find(`div.${refreshTableDivClass}`).find("button > i").addClass(" fa-spin")
+            },
+            stopRefreshSpin: function(){
+                let tableDomElement = getTableDomElement(this);
+                tableDomElement.parent().find(`div.${refreshTableDivClass}`).find("button > i").removeClass(" fa-spin")
             }
         },
         mounted: function () {
