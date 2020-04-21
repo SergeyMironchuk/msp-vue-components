@@ -105,7 +105,7 @@
     mounted: function(){
       // eslint-disable-next-line no-undef
       if (this.$refs.dataTable) this.$refs.dataTable.addActionElement($("#refreshButton"));
-      this.$refs.dataTable.startRefreshSpin();
+      //this.$refs.dataTable.startRefreshSpin();
     },
     methods: {
       refresh: function(){

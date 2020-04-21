@@ -169,8 +169,9 @@
                 "responsive": true,
                 "dom":
                     `<"row no-gutters ${tableToolsDivClass}"
-                        <"col-sm-12 col-md-6 text-left"<"${tableFilterDivClass}">>
-                        <"col-sm-12 col-md-6 text-right"<"pageSizeBlock"l><"inlineBlock"B><"${refreshTableDivClass}">>
+                        <"col-xs-12 col-sm-6 text-left"<"${tableFilterDivClass}">>
+                        <"col-xs-12 col-sm-6 text-right"<"pageSizeBlock"l><"inlineBlock"B>
+                        <"${refreshTableDivClass}">>
                     >
                     <"${tableActionsDivClass}">
                     rt
@@ -211,7 +212,7 @@
         let pageSizeBlock = tableDomElement.parent().find('div.pageSizeBlock');
         pageSizeBlock
             .css("display", "inline-block")
-            .css("padding-left", "53px")
+            .css("padding-left", "5px")
             .css("margin-bottom", "-12px");
          pageSizeBlock.find('select')
              .css("background", "#868686")
@@ -224,7 +225,8 @@
         }
         tableDomElement.parent().find(`div.${refreshTableDivClass}`)
             .css("display", "inline-block")
-            .css("padding-left", "0");
+            .css("padding-left", "0")
+            .hide();
     }
 
     function addRowsSelectionColumn(tableComponent, columnNumber, dataTableConfig) {
