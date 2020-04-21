@@ -197,6 +197,9 @@
                 updateSelectIconInHeader(tableDomElement, dataTable, tableComponent);
                 createAsyncElements(tableDomElement, dataTable, columnComponents);
             });
+            dataTable.on('responsive-display', function () {
+                createAsyncElements(tableDomElement, dataTable, columnComponents);
+            });
         }
     };
 
@@ -526,6 +529,9 @@
 
     function processClickEventOnActionElement (actionElement, dataTable, columnComponents) {
         let tr = actionElement.parents("tr");
+        if (tr.hasClass("child")){
+            tr = tr.prev();
+        }
         let model = dataTable.row(tr).data();
         let actionId = actionElement.attr(`${actionIdAttribute}`);
         if (actionId) {
@@ -547,6 +553,9 @@
             // eslint-disable-next-line no-undef
             let contentElement = $(this);
             let tr = contentElement.parents("tr");
+            if (tr.hasClass("child")){
+                tr = tr.prev();
+            }
             let model = dataTable.row(tr).data();
             let contentId = contentElement.attr(`${asyncContentIdAttribute}`);
             if (contentId) {
