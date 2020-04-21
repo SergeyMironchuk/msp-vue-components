@@ -4,24 +4,30 @@
                       processing-enable id-data-field="id" page-length="25"
                     refresh-button-icon="<i class='fas fa-sync'></i>"
                     search-button-icon="<i class='fas fa-search'></i>"
-                    class-name="table table-striped table-bordered"
+                    class-name="table table-striped table-bordered nowrap"
                     selected-row-icon="<i class='far fa-check-square'>"
                     unselected-row-icon="<i class='far fa-square'>"
                     exists-selected-rows-icon="<i class='fas fa-square'></i>"
                     v-on:row-selected="onRowSelected">
       <msp-column header="name" model-property="name" sortable>
+<!--
         <msp-column-template>
           [[if(model.id)?]]<i class="fas fa-user-circle fa-1x"/> [[model.name]] (<b> [[model.id]] </b>)[[:]]
         </msp-column-template>
+-->
       </msp-column>
       <msp-column header="position" model-property="position" sortable />
       <msp-column header="office" model-property="office" sortable>
+<!--
         <msp-async-content
                 :get-async-content="getAsyncContent"
                 spin-template=" <i class='fas fa-spinner fa-spin'></i>">
         </msp-async-content>
+-->
       </msp-column>
       <msp-column header="salary" model-property="salary" sortable class-name="text-right"/>
+      <msp-column header="start_date" model-property="start_date" sortable class-name="text-right"/>
+      <msp-column header="extn" model-property="extn" sortable class-name="text-right"/>
       <msp-column header="" class-name="text-right">
         <msp-column-template>
           <span style="margin-right: 3px;"><i class="fas fa-user-circle fa-1x"/></span>

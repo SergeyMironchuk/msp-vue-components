@@ -164,6 +164,7 @@
                     extend: 'colvis',
                     text: 'Show / hide columns'
                 }],
+                "responsive": { details: false },
                 "dom":
                     `<"row no-gutters ${tableToolsDivClass}"
                         <"col-sm-12 col-md-6 text-left"<"${tableFilterDivClass}">>
