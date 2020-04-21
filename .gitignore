@@ -20,5 +20,5 @@ yarn-error.log*
 *.sln
 *.sw?
 /public/js/datagrid/
-/public/js/
-/public/css/
+/public/js/*.js
+/public/css/*.css
