@@ -2,9 +2,11 @@
 <script>
     import 'datatables.net-bs/css/dataTables.bootstrap.min.css'
     import 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css'
+    import 'datatables.net-responsive-bs/css/responsive.bootstrap.min.css'
     import $ from 'jquery'
     import 'datatables.net-bs'
     import 'datatables.net-buttons-bs'
+    import 'datatables.net-responsive-bs'
     import 'datatables.net-buttons/js/buttons.colVis.js'
     import MspColumn from './MspColumn'
 
@@ -164,7 +166,7 @@
                     extend: 'colvis',
                     text: 'Show / hide columns'
                 }],
-                "responsive": { details: false },
+                "responsive": true,
                 "dom":
                     `<"row no-gutters ${tableToolsDivClass}"
                         <"col-sm-12 col-md-6 text-left"<"${tableFilterDivClass}">>
@@ -194,6 +196,9 @@
 
             dataTable.on('draw', function () {
                 updateSelectIconInHeader(tableDomElement, dataTable, tableComponent);
+                createAsyncElements(tableDomElement, dataTable, columnComponents);
+            });
+            dataTable.on('responsive-display', function () {
                 createAsyncElements(tableDomElement, dataTable, columnComponents);
             });
         }
@@ -527,6 +532,9 @@
 
     function processClickEventOnActionElement (actionElement, dataTable, columnComponents) {
         let tr = actionElement.parents("tr");
+        if (tr.hasClass("child")){
+            tr = tr.prev();
+        }
         let model = dataTable.row(tr).data();
         let actionId = actionElement.attr(`${actionIdAttribute}`);
         if (actionId) {
@@ -547,6 +555,9 @@
         tableDomElement.find(`[${asyncContentIdAttribute}]`).each(function () {
             let contentElement = $(this);
             let tr = contentElement.parents("tr");
+            if (tr.hasClass("child")){
+                tr = tr.prev();
+            }
             let model = dataTable.row(tr).data();
             let contentId = contentElement.attr(`${asyncContentIdAttribute}`);
             if (contentId) {
