@@ -19,6 +19,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-/public/js/datagrid/
-/public/js/*.js
-/public/css/*.css
+public/js
+public/css
