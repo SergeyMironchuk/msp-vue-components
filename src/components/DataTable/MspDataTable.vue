@@ -163,6 +163,7 @@
                     titleAttr: 'Col visibility',
                     className: 'btn-outline-default'
                 }],
+                "responsive": { details: true },
                 "dom":
                     `<"row ${tableToolsDivClass}"
                         <"col-sm-12 col-md-6 d-flex align-items-center justify-content-start"<"${tableFilterDivClass}">>

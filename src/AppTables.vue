@@ -18,6 +18,8 @@
         </msp-async-content>
       </msp-column>
       <msp-column header="salary" model-property="salary" sortable class-name="text-right"/>
+      <msp-column header="start_date" model-property="start_date" sortable class-name="text-right"/>
+      <msp-column header="extn" model-property="extn" sortable class-name="text-right"/>
       <msp-column header="" class-name="text-right">
         <msp-column-template>
           <span style="margin-right: 3px;"><i class="fas fa-user-circle fa-1x"/></span>
