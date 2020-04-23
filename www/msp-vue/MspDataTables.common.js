@@ -29410,7 +29410,7 @@ var tableActionsDivClass = 'actions';
         text: 'Show / hide columns'
       }],
       "responsive": true,
-      "dom": "<\"row no-gutters ".concat(tableToolsDivClass, "\"\n                    <\"col-sm-12 col-md-6 text-left\"<\"").concat(tableFilterDivClass, "\">>\n                    <\"col-sm-12 col-md-6 text-right\"<\"pageSizeBlock\"l><\"inlineBlock\"B><\"").concat(refreshTableDivClass, "\">>\n                >\n                <\"").concat(tableActionsDivClass, "\">\n                rt\n                <\"row no-gutters\"\n                    <\"col-sm-12 col-md-6\"i>\n                    <\"col-sm-12 col-md-6\"<\"inlineBlock\">p>\n                >")
+      "dom": "<\"row no-gutters ".concat(tableToolsDivClass, "\"\n                    <\"col-xs-12 col-sm-6 text-left\"<\"").concat(tableFilterDivClass, "\">>\n                    <\"col-xs-12 col-sm-6 text-right\"<\"pageSizeBlock\"l><\"inlineBlock\"B>\n                    <\"").concat(refreshTableDivClass, "\">>\n                >\n                <\"").concat(tableActionsDivClass, "\">\n                rt\n                <\"row no-gutters\"\n                    <\"col-sm-12 col-md-6\"i>\n                    <\"col-sm-12 col-md-6\"<\"inlineBlock\">p>\n                >")
     });
     tableDomElement.show();
     var columnComponents = this.columns;
@@ -29436,7 +29436,7 @@ var tableActionsDivClass = 'actions';
 function adjustTableToolbarElements(tableDomElement, tableComponent) {
   tableDomElement.parent().find('div.inlineBlock').css("display", "inline-block").css("padding-left", "3px");
   var pageSizeBlock = tableDomElement.parent().find('div.pageSizeBlock');
-  pageSizeBlock.css("display", "inline-block").css("padding-left", "53px").css("margin-bottom", "-12px");
+  pageSizeBlock.css("display", "inline-block").css("padding-left", "5px").css("margin-bottom", "-12px");
   pageSizeBlock.find('select').css("background", "#868686").css("color", "white");
   tableDomElement.parent().find("div.".concat(tableActionsDivClass)).css("display", "inline-block").css("padding", "10px 0 0 0");
 
@@ -29444,7 +29444,7 @@ function adjustTableToolbarElements(tableDomElement, tableComponent) {
     tableDomElement.parent().find("div.".concat(tableToolsDivClass)).hide();
   }
 
-  tableDomElement.parent().find("div.".concat(refreshTableDivClass)).css("display", "inline-block").css("padding-left", "0");
+  tableDomElement.parent().find("div.".concat(refreshTableDivClass)).css("display", "inline-block").css("padding-left", "0").hide();
 }
 
 function addRowsSelectionColumn(tableComponent, columnNumber, dataTableConfig) {
