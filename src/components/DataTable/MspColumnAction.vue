@@ -3,6 +3,7 @@
         name: "MspColumnAction",
         props: {
             onAction: Function,
+            isVisible: {type: Function, default: function(){return true;}},
             template: String,
             confirmMessage: String
         },

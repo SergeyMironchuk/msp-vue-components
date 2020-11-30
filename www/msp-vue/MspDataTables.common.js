@@ -29318,6 +29318,7 @@ var tableActionsDivClass = 'actions';
         dataTable.processing = false;
         emitAboutSelectedRows(dataTable, _this, tableDomElement);
         tableComponent.$emit(tableRefreshedEvent);
+        hideOrShowActionElements(tableDomElement, dataTable, tableComponent.columns);
       });
     },
     addActionElement: function addActionElement(actionDomElement) {
@@ -29426,9 +29427,11 @@ var tableActionsDivClass = 'actions';
     dataTable.on('draw', function () {
       updateSelectIconInHeader(tableDomElement, dataTable, tableComponent);
       createAsyncElements(tableDomElement, dataTable, columnComponents);
+      hideOrShowActionElements(tableDomElement, dataTable, columnComponents);
     });
     dataTable.on('responsive-display', function () {
       createAsyncElements(tableDomElement, dataTable, columnComponents);
+      hideOrShowActionElements(tableDomElement, dataTable, columnComponents);
     });
   }
 });
@@ -29776,6 +29779,31 @@ function getAsyncElementsOptions(tableDomElement, dataTable, columnComponents) {
     }
   });
   return asyncElements;
+}
+
+function hideOrShowActionElements(tableDomElement, dataTable, columnComponents) {
+  tableDomElement.find("[".concat(actionIdAttribute, "]")).each(function () {
+    var contentElement = jquery__WEBPACK_IMPORTED_MODULE_22___default()(this);
+    var tr = contentElement.parents("tr");
+
+    if (tr.hasClass("child")) {
+      tr = tr.prev();
+    }
+
+    var model = dataTable.row(tr).data();
+    var contentId = contentElement.attr("".concat(actionIdAttribute));
+
+    if (contentId) {
+      var contentIdArray = contentId.split('_');
+      var action = columnComponents[+contentIdArray[0]].actions[+contentIdArray[1]];
+
+      if (!action.isVisible(model)) {
+        contentElement.hide();
+      } else {
+        contentElement.show();
+      }
+    }
+  });
 }
 
 function isContentEmpty(content) {
@@ -33304,6 +33332,12 @@ for (var COLLECTION_NAME in DOMIterables) {
   name: "MspColumnAction",
   props: {
     onAction: Function,
+    isVisible: {
+      type: Function,
+      default: function _default() {
+        return true;
+      }
+    },
     template: String,
     confirmMessage: String
   },

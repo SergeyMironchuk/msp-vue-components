@@ -80,6 +80,7 @@
                     dataTable.processing = false;
                     emitAboutSelectedRows(dataTable, this, tableDomElement);
                     tableComponent.$emit(tableRefreshedEvent);
+                    hideOrShowActionElements (tableDomElement, dataTable, tableComponent.columns);
                 });
             },
             addActionElement: function(actionDomElement){
@@ -198,9 +199,11 @@
             dataTable.on('draw', function () {
                 updateSelectIconInHeader(tableDomElement, dataTable, tableComponent);
                 createAsyncElements(tableDomElement, dataTable, columnComponents);
+                hideOrShowActionElements (tableDomElement, dataTable, columnComponents);
             });
             dataTable.on('responsive-display', function () {
                 createAsyncElements(tableDomElement, dataTable, columnComponents);
+                hideOrShowActionElements (tableDomElement, dataTable, columnComponents);
             });
         }
     };
@@ -576,6 +579,28 @@
             }
         });
         return asyncElements;
+    }
+
+    function hideOrShowActionElements (tableDomElement, dataTable, columnComponents) {
+      tableDomElement.find(`[${actionIdAttribute}]`).each(function () {
+        let contentElement = $(this);
+        let tr = contentElement.parents("tr");
+        if (tr.hasClass("child")){
+          tr = tr.prev();
+        }
+        let model = dataTable.row(tr).data();
+        let contentId = contentElement.attr(`${actionIdAttribute}`);
+        if (contentId) {
+          let contentIdArray = contentId.split('_');
+          let action = columnComponents[+contentIdArray[0]].actions[+contentIdArray[1]];
+          if (!action.isVisible(model)){
+            contentElement.hide();
+          }
+          else {
+            contentElement.show();
+          }
+        }
+      });
     }
 
     function isContentEmpty (content) {

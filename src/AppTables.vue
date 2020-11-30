@@ -31,6 +31,7 @@
         </msp-column-template>
         <msp-column-action
                 :on-action="onEmail"
+                :is-visible="isEmailVisible"
                 template="<i class='fas fa-envelope'></i>">
         </msp-column-action>
         <msp-column-action
@@ -190,6 +191,13 @@
       },
       onEmail: function (model) {
         alert('EMailed to ' + model.id);
+      },
+      isEmailVisible: function (model) {
+        if (model.id === "3") {
+          return false
+        } else {
+          return true;
+        }
       },
       onDelete: function (model) {
         alert('Deleted ' + model.id);
